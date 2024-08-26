@@ -1,0 +1,21 @@
+---
+import { CardProjectComponent } from "@/helper/landingpage/card";
+
+const projectData = [
+  { title: "LancarCom", description: "Developed a government fund transparency system aimed at streamlining bureaucratic processes in Indonesia. My role as a Backend Developer involved creating RESTful APIs to deliver statistical data, manage government wallets, and implement Groq AI for advanced financial review and analysis.", img:"src/assets/project/LancarCom.png" },
+  { title: "TEDXUII", description: "Designed and implemented a ticketing and promotional system for an event at UII. As a Backend Developer, I was responsible for creating RESTful APIs to handle ticketing, data display, and optimizing image storage to ensure smooth front-end performance.", img:"src/assets/project/TEDXUII.png" },
+  { title: "Nasho APP", description: "Developed an Arabic language learning platform designed to complement classroom learning. The app features quizzes, structured content with a Lock System, and detailed statistics. My role as a Backend Developer focused on building RESTful APIs to support these functionalities.", img:"src/assets/project/Nasho.png" },
+];
+---
+
+<div class="flex flex-col laptop:flex-row laptop:flex-wrap items-center my-24 text-white w-full px-6 ">
+  <div class="mb-8 text-center w-full">
+    <h3 class="text-3xl laptop:text-5xl font-bold">Projects</h3>
+    <p class="text-lg laptop:text-2xl text-gray-400">Check out some of my works</p>
+  </div>
+  <div class="flex flex-col laptop:flex-row gap-8 justify-center w-full">
+    {projectData.map((project, index) => (
+      <CardProjectComponent title={project.title} description={project.description} img={project.img} />
+    ))}
+  </div>
+</div>

@@ -1,0 +1,88 @@
+---
+import Button from "../../components/Button.astro";
+import InputField from "../../components/InputField.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <form id="registerForm">
+      <h2>Register</h2>
+      <InputField type="text" name="username" placeholder="Username" required={true} />
+      <InputField type="password" name="password" placeholder="Password" required={true} />
+      <InputField type="retypepassword" name="retypepassword" placeholder="ReType Password" required={true} />
+
+      <div class="ButtonContainer">
+        <Button type="Button" href="/auth/login" text="Login" />
+        <Button type="Submit" text="Register" />
+      </div>
+    </form>
+  </main>
+</Layout>
+
+
+
+<script>
+
+  import Toast from "typescript-toastify";
+import {type RegisterData, registerUser } from "../../utils/auth/register";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const RegisterForm = document.getElementById("registerForm") as any;
+
+    const handleLogin = async (event: Event) => {
+      event.preventDefault();
+
+      const formData = new FormData(RegisterForm);
+      const dataRegister: RegisterData = {
+        nama: formData.get("username") as string,
+        password: formData.get("password") as string,
+        retypepassword: formData.get("retypepassword") as string
+      };
+
+      const RegisterUserFetch = await registerUser(dataRegister);
+      if (RegisterUserFetch.statusCode == 201) {
+        // Set cookie using document.cookie
+        document.cookie = `access_token=${RegisterUserFetch.data?.access_token}; path=/`;
+
+        // Redirect to /tasks/
+        window.location.href = "/tasks/";
+      } else {
+        new Toast({
+          position: "top-right",
+          toastMsg: `${RegisterUserFetch.message}`,
+          autoCloseTime: 4500,
+          canClose: true,
+          showProgress: true,
+          pauseOnHover: true,
+          pauseOnFocusLoss: true,
+          type: "error",
+          theme: "dark",
+        });
+      }
+    };
+
+    RegisterForm.addEventListener("submit", handleLogin);
+  });
+</script>
+
+
+<style>
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 40%;
+  }
+
+  .ButtonContainer {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+</style>

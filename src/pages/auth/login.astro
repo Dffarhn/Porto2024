@@ -1,0 +1,81 @@
+---
+import Button from "../../components/Button.astro";
+import InputField from "../../components/InputField.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Login">
+  <main>
+    <form id="loginForm">
+      <h2>Login</h2>
+      <InputField type="text" name="username" placeholder="Username" required={true} />
+      <InputField type="password" name="password" placeholder="Password" required={true} />
+
+      <div class="ButtonContainer">
+        <Button type="submit" text="Login" />
+        <Button type="button" href="/auth/register" text="Register" />
+      </div>
+    </form>
+  </main>
+</Layout>
+
+<script>
+  import { loginUser, type LoginData } from "../../utils/auth/login";
+  import Toast from "typescript-toastify";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("loginForm") as any;
+
+    const handleLogin = async (event: Event) => {
+      event.preventDefault();
+
+      const formData = new FormData(loginForm);
+      const dataLogin: LoginData = {
+        nama: formData.get("username") as string,
+        password: formData.get("password") as string,
+      };
+
+      const LoginUserFetch = await loginUser(dataLogin);
+      if (LoginUserFetch.statusCode == 200) {
+        // Set cookie using document.cookie
+        document.cookie = `access_token=${LoginUserFetch.data?.access_token}; path=/`;
+
+        // Redirect to /tasks/
+        window.location.href = "/tasks/";
+      } else {
+        new Toast({
+          position: "top-right",
+          toastMsg: `${LoginUserFetch.message}`,
+          autoCloseTime: 4500,
+          canClose: true,
+          showProgress: true,
+          pauseOnHover: true,
+          pauseOnFocusLoss: true,
+          type: "error",
+          theme: "dark",
+        });
+      }
+    };
+
+    loginForm.addEventListener("submit", handleLogin);
+  });
+</script>
+
+<style>
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 40%;
+  }
+
+  .ButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+</style>

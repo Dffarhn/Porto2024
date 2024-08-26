@@ -1,0 +1,48 @@
+---
+// Define any props if needed. Here, no props are necessary as it's a standalone component.
+---
+
+<div class="hamburger" id="hamburger">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  
+  <style>
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+  
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+  
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+    }
+  </style>
+  
+  <script>
+    const hamburger = document.getElementById('hamburger') as any;
+    const navbarMenu = document.querySelector('.navbar-menu') as any;
+    const navbarLinks = document.querySelectorAll('.navbar-link')as any;
+  
+    hamburger.addEventListener('click', () => {
+      navbarMenu.classList.toggle('active');
+    });
+  
+    navbarLinks.forEach((link: { addEventListener: (arg0: string, arg1: () => void) => void; }) => {
+      link.addEventListener('click', () => {
+        navbarMenu.classList.remove('active');
+      });
+    });
+  </script>
+  

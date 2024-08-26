@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+
+import PhotoDiri from "../../assets/fotopribadi.jpg";
+
+import SocialComponent from "../LandingPage/SocialMedia.astro";
+
+import instagrampicture from "../../assets/social/instagram.png";
+import LinkedlnPicture from "../../assets/social/linkedin.png";
+import GithubPicture from "../../assets/social/github.png";
+import { CarouselOrientation } from "@/helper/landingpage/showSkills";
+
+const socialLinks = [
+  { href: "https://instagram.com/dffar.hn", imgSrc: instagrampicture, alt: "Twitter" },
+  { href: "https://github.com/Dffarhn", imgSrc: GithubPicture, alt: "GitHub" },
+  { href: "https://linkedin.com/in/dapdap", imgSrc: LinkedlnPicture, alt: "LinkedIn" },
+];
+
+const skillItems = {
+  backend: {
+    title: "Backend Skills",
+    items: [
+      { image: "src/assets/journey/express.png", nama: "Express Js" },
+      { image: "src/assets/journey/nestjs.png", nama: "Nest Js" },
+      { image: "src/assets/journey/php.png", nama: "PHP" },
+    ],
+  },
+  frontend: {
+    title: "Frontend Skills",
+    items: [
+      { image: "src/assets/journey/astro.png", nama: "Astro" },
+      { image: "src/assets/journey/html.png", nama: "HTML" },
+      { image: "src/assets/journey/css.png", nama: "CSS" },
+    ],
+  },
+  database: {
+    title: "Database Skills",
+    items: [
+      { image: "src/assets/journey/postgresql.png", nama: "PostgreSQL" },
+      { image: "src/assets/journey/mysql.svg", nama: "MySQL" },
+      { image: "src/assets/journey/supabase.png", nama: "Supabase" },
+    ],
+  },
+};
+---
+
+<div class="flex flex-col laptop:flex-row laptop:flex-wrap items-center my-24 text-white w-full laptop:px-6">
+  <div class="text-center w-full">
+    <h3 class="text-3xl laptop:text-5xl font-bold">About</h3>
+  </div>
+
+  <div class="laptop:h-screen laptop:flex laptop:items-center container-greeting w-auto flex flex-col-reverse justify-between laptop:flex-row laptop:px-8 tablet:px-0 laptop:justify-items-center shadow-md py-8">
+    <div class="grid grid-cols-2 container-image w-full laptop:w-2/5 h-fit laptop:h-[700px] rounded-lg gap-8 items-center justify-center p-4 tablet:p-0">
+      <CarouselOrientation title={skillItems.backend.title} items={skillItems.backend.items} client:load />
+      <CarouselOrientation title={skillItems.frontend.title} items={skillItems.frontend.items} client:load />
+      <CarouselOrientation title={skillItems.database.title} items={skillItems.database.items} client:load />
+    </div>
+    <div class="container-text px-4 py-6 mx-8 bg-blue-950 text-black laptop:h-auto laptop:px-14 laptop:py-6 laptop:w-2/4 animate-shadow-pop-bl rounded">
+      <h5 class="text-lg text-gray-300 my-4 leading-relaxed">
+        <span class="block mb-2 text-blue-400 font-semibold text-xl">🚀 Experienced Backend Engineer</span>
+        <span class="block mb-2">Specializing in <span class="font-bold text-white">Node.js</span> and <span class="font-bold text-white">Express.js</span>.</span>
+        <span class="block mb-4">🌐 Passionate about crafting robust and scalable backend solutions that power modern web applications.</span>
+
+        <span class="block mb-2">💻 Technologies & Tools:</span>
+        <span class="block mb-4">
+          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Astro</span>
+          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Express.js</span>
+          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">RESTful APIs</span>
+          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">PostgreSQL</span>
+          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Nest Js</span>
+        </span>
+
+        <span class="block mb-4">🔍 Open to exciting opportunities in backend development, system architecture, and cloud technologies.</span>
+        <span class="block text-blue-400 font-semibold text-lg">Let's connect and explore how we can collaborate to build innovative solutions!</span>
+      </h5>
+    </div>
+  </div>
+</div>
+
+<!-- Tailwind Config -->

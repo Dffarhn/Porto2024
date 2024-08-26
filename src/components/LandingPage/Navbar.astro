@@ -1,0 +1,110 @@
+---
+import HamburgerMenu from "./HamburgerMenu.astro";
+
+
+const { navigasi } = Astro.props;
+---
+
+<nav>
+  <div class="navbar-title">
+    <h3>
+      <span class="title-white">Dffarhn</span>
+      <span class="title-blue">Site</span>
+    </h3>
+  </div>
+
+  <div class="navbar-left">
+    <ul class="navbar-menu">
+      {navigasi.map((link: { href: string | URL | null | undefined; text: unknown }) => (
+        <li class="navbar-item">
+          <a href={link.href} class="navbar-link">
+            {link.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <HamburgerMenu />
+  </div>
+</nav>
+
+<style>
+  nav {
+    background: #0F0F0F;
+    color: #fff;
+    padding: 0.5rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+  }
+
+  .navbar-title h3 {
+    margin: 0;
+    font-size: 30px;
+  }
+
+  .title-white {
+    color: #fff;
+  }
+
+  .title-blue {
+    color: #308dd4;
+  }
+
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-item {
+    margin-left: 1rem;
+    font-size: 25px;
+  }
+
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    border: 2px solid #308dd400;
+    border-radius: 10px;
+    transition: background 0.3s, color 0.3s, border 0.2s;
+  }
+
+  .navbar-link:hover {
+    background: #1A1A1A;
+    color: #308dd4;
+    border: 2px solid #308dd4;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      padding: 0.5rem 2rem;
+    }
+
+    .navbar-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: 100px;
+      left: 0;
+      background-color: #0F0F0F;
+      padding: 1rem 0;
+      z-index: 10;
+    }
+
+    .navbar-item {
+      margin: 0;
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .navbar-menu.active {
+      display: flex;
+    }
+  }
+</style>

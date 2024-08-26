@@ -1,0 +1,85 @@
+---
+import Navbar from "../components/LandingPage/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import Greeting from "../components/LandingPage/Greeting.astro";
+import JourneyTimeline from "../components/LandingPage/JourneyTimeline.astro";
+import { Separator } from "@/components/ui/separator";
+import CardProject from "@/components/LandingPage/CardProject.astro";
+import FormLP from "@/components/LandingPage/FormLP.astro";
+import AboutPage from "@/components/LandingPage/AboutPage.astro";
+
+const navLinks = [
+  { href: "#greeting", text: "Home" },
+  { href: "#about", text: "About" },
+  { href: "#journey", text: "Journey" },
+  { href: "#projects", text: "Project" }, // Add additional sections here
+  { href: "#contact", text: "Contact" }, // Add additional sections here
+];
+---
+
+<Layout title="Portfolio">
+  <Navbar navigasi={navLinks} />
+
+  <section id="greeting">
+    <Greeting />
+  </section>
+  
+  <Separator />
+
+  <section id="about">
+    <AboutPage />
+  </section>
+
+  <Separator />
+
+  <section id="journey">
+    <JourneyTimeline />
+  </section>
+  
+  <Separator />
+  
+  <section class="overflow-hidden" id="projects">
+    <CardProject />
+  </section>
+  <Separator />
+  
+  
+  <section id="contact">
+    <FormLP />
+  </section>
+
+
+  <a
+    id="scrollToTop"
+    href="#"
+    class="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-110 hidden"
+    onclick="scrollToTop()"
+    aria-label="Scroll to top"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 mx-auto">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+    </svg>
+  </a>
+</Layout>
+
+<script>
+  // Show or hide the scroll-to-top button based on scroll position
+  window.onscroll = function () {
+    const scrollTopButton:any = document.getElementById("scrollToTop");
+    if (document.documentElement.scrollTop > 300 || document.body.scrollTop > 300) {
+      scrollTopButton.classList.remove("hidden");
+      scrollTopButton.classList.add("visible");
+    } else {
+      scrollTopButton.classList.remove("visible");
+      scrollTopButton.classList.add("hidden");
+    }
+  };
+
+  // Scroll to the top of the page when the button is clicked
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+</script>

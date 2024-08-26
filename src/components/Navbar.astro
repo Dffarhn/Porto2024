@@ -1,0 +1,87 @@
+---
+const { links } = Astro.props;
+
+---
+
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="/" class="navbar-logo">MyApp</a>
+    <ul class="navbar-menu">
+      {links.map((link: { href: string | URL | null | undefined; text: unknown; }) => (
+        <li class="navbar-item">
+          <a href={link.href} class="navbar-link">{link.text}</a>
+        </li>
+      ))}
+      <li class="navbar-item">
+        <button class="navbar-link logout-button" id="logoutButton">Logout</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const logoutButton = document.getElementById('logoutButton');
+      console.log(logoutButton)
+  
+      if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+          document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          window.location.href = '/auth/login';
+        });
+      }
+    });
+  </script>
+  
+<style>
+  .navbar {
+    background: #007bff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-item {
+    margin-left: 1rem;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .navbar-link:hover {
+    text-decoration: underline;
+  }
+
+  .logout-button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+</style>

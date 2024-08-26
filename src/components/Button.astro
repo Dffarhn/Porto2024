@@ -1,0 +1,29 @@
+---
+// Props
+const { type = 'submit', text, href = null } = Astro.props;
+---
+{href ? (
+  <a class="button" href={href}>{text}</a>
+) : (
+  <button type={type} class="button">{text}</button>
+)}
+
+<style>
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none; /* Ensure link looks like a button */
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+</style>

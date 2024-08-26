@@ -1,0 +1,21 @@
+---
+// Props
+const { type = 'text', name, placeholder, required = false } = Astro.props;
+---
+<div class="input-field">
+  <input type={type} name={name} placeholder={placeholder} required={required} />
+</div>
+
+<style>
+.input-field {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+</style>

@@ -1,0 +1,15 @@
+---
+import FormContact from "@/helper/landingpage/formSchema";
+---
+
+<div class="flex flex-col items-center my-24 text-white laptop:h-full y-12 px-4">
+  <div class="mb-8 text-center">
+    <h3 class="text-3xl laptop:text-5xl font-bold drop-shadow-lg">Contact Us</h3>
+    <p class="mt-4 text-lg laptop:text-xl text-white opacity-90">
+      We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+    </p>
+  </div>
+  <div class="w-full max-w-lg text-black">
+    <FormContact client:load />
+  </div>
+</div>
