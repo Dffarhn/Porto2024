@@ -3,32 +3,123 @@ import { CardProjectComponent } from "@/helper/landingpage/card";
 
 const projectData = [
   {
-    title: "LancarCom",
+    title: "IMUII",
+    subtitle: "End-to-End Automation Platform",
     description:
-      "Developed a government fund transparency system aimed at streamlining bureaucratic processes in Indonesia. My role as a Backend Developer involved creating RESTful APIs to deliver statistical data, manage government wallets, and implement Groq AI for advanced financial review and analysis.",
-    img: "/project/LancarCom.png",
+      "IMUII adalah platform automation yang saya bangun dari nol sebagai Founder & Technical Architect. Platform ini mengelola lebih dari 45 project aktif dengan 82% deployment success rate.",
+    features: [
+      "Automated CI/CD",
+      "One-command project initialization",
+      "Real-time monitoring",
+      "GitHub & environment provisioning"
+    ],
+    techStack: ["Golang", "Docker", "PostgreSQL", "Redis"],
+    impact: "Digunakan oleh puluhan project aktif • CPU usage turun ~19% di production",
+    img: "/project/LancarCom.png", // Placeholder, perlu diganti dengan gambar IMUII
   },
   {
-    title: "TEDXUII",
+    title: "HalalMate",
+    subtitle: "AI-Powered Mobile App",
     description:
-      "Designed and implemented a ticketing and promotional system for an event at UII. As a Backend Developer, I was responsible for creating RESTful APIs to handle ticketing, data display, and optimizing image storage to ensure smooth front-end performance.",
-    img: "/project/TEDXUII.png",
+      "HalalMate adalah aplikasi mobile berbasis AI untuk membantu traveler Muslim memverifikasi makanan halal secara otomatis. Saya membangun backend service dan AI pipeline menggunakan OCR dan OpenAI.",
+    features: [
+      "AI-powered halal verification",
+      "OCR untuk scan label makanan",
+      "Google Maps integration"
+    ],
+    techStack: ["Golang", "Flutter", "OpenAI API", "OCR", "Google Maps API"],
+    impact: "93% classification accuracy • 100% recall",
+    img: "/project/Nasho.png", // Placeholder, perlu diganti dengan gambar HalalMate
   },
   {
-    title: "Nasho APP",
+    title: "KeepUp",
+    subtitle: "Mental Health Research System",
     description:
-      "Developed an Arabic language learning platform designed to complement classroom learning. The app features quizzes, structured content with a Lock System, and detailed statistics. My role as a Backend Developer focused on building RESTful APIs to support these functionalities.",
-    img: "/project/Nasho.png",
+      "Backend system untuk riset kesehatan mental di Universitas Islam Indonesia. Sistem ini menangani secure authentication, role-based access control, dan automated report generation.",
+    features: [
+      "Secure authentication & RBAC",
+      "Automated report generation (PDF & Excel)",
+      "AI-powered report interpretation"
+    ],
+    techStack: ["NestJS", "PostgreSQL", "Redis", "OpenAI API"],
+    impact: "Sistem riset yang aman dan terotomasi untuk penelitian kesehatan mental",
+    img: "/project/TEDXUII.png", // Placeholder, perlu diganti dengan gambar KeepUp
   },
 ];
 ---
 
-<div class="flex flex-col laptop:flex-row laptop:flex-wrap items-center my-24 text-white w-full px-6">
+<div class="projects-section">
+  <div class="section-background">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+  </div>
+  <div class="flex flex-col laptop:flex-row laptop:flex-wrap items-center my-24 text-white w-full px-6 relative z-10">
   <div class="mb-8 text-center w-full">
     <h3 class="text-3xl laptop:text-5xl font-bold">Projects</h3>
     <p class="text-lg laptop:text-2xl text-gray-400">Check out some of my works</p>
   </div>
   <div class="flex flex-col laptop:flex-row gap-8 justify-center w-full">
-    {projectData.map((project, index) => <CardProjectComponent title={project.title} description={project.description} img={project.img} />)}
+    {projectData.map((project, index) => (
+      <CardProjectComponent 
+        title={project.title} 
+        subtitle={project.subtitle}
+        description={project.description} 
+        features={project.features}
+        techStack={project.techStack}
+        impact={project.impact}
+        img={project.img} 
+      />
+    ))}
   </div>
 </div>
+
+<style>
+  .projects-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .section-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.25;
+  }
+
+  .blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(var(--primary), 0.7), rgba(var(--primary), 0));
+    top: -200px;
+    left: -150px;
+    animation: float-projects-1 14s ease-in-out infinite alternate;
+  }
+
+  .blob-2 {
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(var(--accent), 0.6), rgba(var(--accent), 0));
+    bottom: -250px;
+    right: -100px;
+    animation: float-projects-2 16s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes float-projects-1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(50px, 60px) rotate(12deg); }
+  }
+
+  @keyframes float-projects-2 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-60px, -40px) rotate(-15deg); }
+  }
+</style>

@@ -1,80 +1,359 @@
 ---
-import { Image } from "astro:assets";
+import { TechStackScroll } from "@/helper/landingpage/techStackScroll";
+import "@/styles/techStackScroll.css";
 
-import PhotoDiri from "../../assets/fotopribadi.jpg";
-
-import SocialComponent from "../LandingPage/SocialMedia.astro";
-
-import instagrampicture from "../../assets/social/instagram.png";
-import LinkedlnPicture from "../../assets/social/linkedin.png";
-import GithubPicture from "../../assets/social/github.png";
-import { CarouselOrientation } from "@/helper/landingpage/showSkills";
-
-const socialLinks = [
-  { href: "https://instagram.com/dffar.hn", imgSrc: instagrampicture, alt: "Twitter" },
-  { href: "https://github.com/Dffarhn", imgSrc: GithubPicture, alt: "GitHub" },
-  { href: "https://linkedin.com/in/dapdap", imgSrc: LinkedlnPicture, alt: "LinkedIn" },
+const allTechStack = [
+  { image: "/journey/nestjs.png", nama: "NestJS" },
+  { image: "/journey/express.png", nama: "Express" },
+  { image: "/journey/golang.png", nama: "Golang" },
+  { image: "/journey/nextjs.png", nama: "Next.js" },
+  { image: "/journey/vite.png", nama: "Vite" },
+  { image: "/journey/postgresql.png", nama: "PostgreSQL" },
+  { image: "/journey/mysql.svg", nama: "MySQL" },
+  { image: "/journey/supabase.png", nama: "Supabase" },
+  { image: "/journey/firebase.png", nama: "Firebase" },
 ];
-
-const skillItems = {
-  backend: {
-    title: "Backend Skills",
-    items: [
-      { image: "/journey/express.png", nama: "Express Js" },
-      { image: "/journey/nestjs.png", nama: "Nest Js" },
-      { image: "/journey/php.png", nama: "PHP" },
-    ],
-  },
-  frontend: {
-    title: "Frontend Skills",
-    items: [
-      { image: "/journey/astro.png", nama: "Astro" },
-      { image: "/journey/html.png", nama: "HTML" },
-      { image: "/journey/css.png", nama: "CSS" },
-    ],
-  },
-  database: {
-    title: "Database Skills",
-    items: [
-      { image: "/journey/postgresql.png", nama: "PostgreSQL" },
-      { image: "/journey/mysql.svg", nama: "MySQL" },
-      { image: "/journey/supabase.png", nama: "Supabase" },
-    ],
-  },
-};
 ---
 
-<div class="flex flex-col laptop:flex-row laptop:flex-wrap items-center my-24 text-white w-full laptop:px-6">
-  <div class="text-center w-full">
-    <h3 class="text-3xl laptop:text-5xl font-bold">About</h3>
+<div class="about-section">
+  <div class="section-background">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+  </div>
+  <div class="about-header">
+    <h2 class="about-title">About</h2>
+    <p class="about-intro">
+      Saya tidak hanya menggunakan tools, tetapi memahami bagaimana tools tersebut digunakan untuk menyelesaikan masalah nyata di production.
+    </p>
   </div>
 
-  <div class="laptop:h-screen laptop:flex laptop:items-center container-greeting w-auto flex flex-col-reverse justify-between laptop:flex-row laptop:px-8 tablet:px-0 laptop:justify-items-center shadow-md py-8">
-    <div class="grid grid-cols-2 container-image w-full laptop:w-2/5 h-fit laptop:h-[700px] rounded-lg gap-8 items-center justify-center p-4 tablet:p-0">
-      <CarouselOrientation title={skillItems.backend.title} items={skillItems.backend.items} client:load />
-      <CarouselOrientation title={skillItems.frontend.title} items={skillItems.frontend.items} client:load />
-      <CarouselOrientation title={skillItems.database.title} items={skillItems.database.items} client:load />
+  <div class="about-content">
+    <div class="about-main">
+      <div class="about-text-container">
+        <div class="about-text">
+          <p class="about-paragraph">
+            Saya adalah mahasiswa Informatika dengan pengalaman membangun dan men-deploy berbagai sistem end-to-end: web, mobile, backend services, dan AI-powered applications.
+          </p>
+          <p class="about-paragraph">
+            Saya terbiasa bekerja dengan real production environment, menangani automation, CI/CD, database design, hingga scalable backend architecture.
+          </p>
+          <p class="about-paragraph">
+            Fokus saya adalah membangun sistem yang scalable, maintainable, dan berdampak langsung ke user.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-number">45+</div>
+          <div class="stat-label">Active Projects</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-number">3.9K+</div>
+          <div class="stat-label">Real Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-number">82%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Students Mentored</div>
+        </div>
+      </div>
     </div>
-    <div class="container-text px-4 py-6 mx-8 bg-blue-950 text-black laptop:h-auto laptop:px-14 laptop:py-6 laptop:w-2/4 animate-shadow-pop-bl rounded">
-      <h5 class="text-lg text-gray-300 my-4 leading-relaxed">
-        <span class="block mb-2 text-blue-400 font-semibold text-xl">🚀 Experienced Backend Engineer</span>
-        <span class="block mb-2">Specializing in <span class="font-bold text-white">Node.js</span> and <span class="font-bold text-white">Express.js</span>.</span>
-        <span class="block mb-4">🌐 Passionate about crafting robust and scalable backend solutions that power modern web applications.</span>
 
-        <span class="block mb-2">💻 Technologies & Tools:</span>
-        <span class="block mb-4">
-          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Astro</span>
-          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Express.js</span>
-          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">RESTful APIs</span>
-          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">PostgreSQL</span>
-          <span class="inline-block bg-blue-800 text-white px-2 py-1 rounded">Nest Js</span>
-        </span>
-
-        <span class="block mb-4">🔍 Open to exciting opportunities in backend development, system architecture, and cloud technologies.</span>
-        <span class="block text-blue-400 font-semibold text-lg">Let's connect and explore how we can collaborate to build innovative solutions!</span>
-      </h5>
+    <div class="tech-stack-section">
+      <h3 class="tech-stack-title">Tech Stack</h3>
+      <TechStackScroll items={allTechStack} client:load />
     </div>
   </div>
 </div>
 
-<!-- Tailwind Config -->
+<style>
+  .about-section {
+    width: 100%;
+    max-width: 1400px;
+    margin: 6rem auto;
+    padding: 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+  }
+
+  .blob-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(var(--primary), 0.6), rgba(var(--primary), 0));
+    top: -150px;
+    right: -100px;
+    animation: float-about-1 12s ease-in-out infinite alternate;
+  }
+
+  .blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--secondary), 0.5), rgba(var(--secondary), 0));
+    bottom: -200px;
+    left: -150px;
+    animation: float-about-2 15s ease-in-out infinite alternate-reverse;
+  }
+
+  .blob-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(var(--accent), 0.4), rgba(var(--accent), 0));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float-about-3 10s ease-in-out infinite alternate;
+  }
+
+  @keyframes float-about-1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(30px, 40px) rotate(15deg); }
+  }
+
+  @keyframes float-about-2 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-40px, 30px) rotate(-10deg); }
+  }
+
+  @keyframes float-about-3 {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-45%, -55%) rotate(20deg); }
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(var(--text));
+    margin: 0 0 1.5rem 0;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .about-intro {
+    font-size: 1.125rem;
+    color: rgb(var(--text-muted));
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text-container {
+    background: var(--gradient-card);
+    border: 1px solid rgba(var(--border), 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all var(--transition-normal);
+  }
+
+  .about-text-container:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(var(--primary), 0.4);
+  }
+
+  .about-stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--gradient-card);
+    border: 1px solid rgba(var(--border), 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(var(--primary), 0.4);
+  }
+
+  .stat-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: rgb(var(--text-muted));
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .about-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-paragraph {
+    font-size: 1.0625rem;
+    color: rgb(var(--text));
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .tech-stack-section {
+    background: var(--gradient-card);
+    border: 1px solid rgba(var(--border), 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all var(--transition-normal);
+  }
+
+  .tech-stack-section:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(var(--primary), 0.4);
+  }
+
+  .tech-stack-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(var(--text));
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+
+  @media (max-width: 1024px) {
+    .about-title {
+      font-size: 2.5rem;
+    }
+
+    .about-main {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-stats-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-section {
+      margin: 4rem auto;
+      padding: 0 1rem;
+    }
+
+    .about-title {
+      font-size: 2rem;
+    }
+
+    .about-intro {
+      font-size: 1rem;
+    }
+
+    .about-text-container,
+    .tech-stack-section {
+      padding: 1.5rem;
+    }
+
+    .about-paragraph {
+      font-size: 1rem;
+    }
+
+    .about-stats-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      padding: 1.25rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+    }
+
+    .stat-icon {
+      font-size: 1.75rem;
+    }
+  }
+</style>

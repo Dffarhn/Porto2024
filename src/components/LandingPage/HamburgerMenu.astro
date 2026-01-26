@@ -2,47 +2,59 @@
 // Define any props if needed. Here, no props are necessary as it's a standalone component.
 ---
 
-<div class="hamburger" id="hamburger">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-  
-  <style>
+<button class="hamburger" id="hamburger" aria-label="Menu">
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+  <span class="hamburger-line"></span>
+</button>
+
+<style>
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 2px;
+    background: rgb(var(--text));
+    transition: all 0.3s ease;
+    transform-origin: left;
+  }
+
+  .hamburger.active .hamburger-line:first-child {
+    transform: rotate(45deg);
+  }
+
+  .hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .hamburger-line:last-child {
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
     .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
+      display: flex;
     }
+  }
+</style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
   
-    .bar {
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      margin: 4px 0;
-      transition: 0.3s;
-    }
-  
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-    }
-  </style>
-  
-  <script>
-    const hamburger = document.getElementById('hamburger') as any;
-    const navbarMenu = document.querySelector('.navbar-menu') as any;
-    const navbarLinks = document.querySelectorAll('.navbar-link')as any;
-  
-    hamburger.addEventListener('click', () => {
-      navbarMenu.classList.toggle('active');
-    });
-  
-    navbarLinks.forEach((link: { addEventListener: (arg0: string, arg1: () => void) => void; }) => {
-      link.addEventListener('click', () => {
-        navbarMenu.classList.remove('active');
-      });
-    });
-  </script>
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    // Add your menu toggle logic here
+  });
+</script>
   

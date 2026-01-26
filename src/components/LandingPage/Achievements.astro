@@ -1,0 +1,144 @@
+---
+---
+
+<div class="achievements-section">
+  <div class="section-background">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+  </div>
+  <div class="flex flex-col items-center my-24 text-white w-full px-6 relative z-10">
+  <div class="mb-8 text-center w-full">
+    <h3 class="text-3xl laptop:text-5xl font-bold mb-4">Achievements & Awards</h3>
+    <p class="text-lg laptop:text-xl text-gray-400">Pencapaian dan penghargaan yang telah saya raih</p>
+  </div>
+  
+  <div class="flex flex-col laptop:flex-row gap-6 justify-center w-full max-w-5xl">
+    <div class="achievement-card">
+      <div class="achievement-icon">🏆</div>
+      <h4 class="achievement-title">Best Paper Award</h4>
+      <p class="achievement-event">Automata 2025</p>
+      <p class="achievement-description">Penghargaan untuk paper terbaik dalam konferensi Automata 2025</p>
+    </div>
+    
+    <div class="achievement-card">
+      <div class="achievement-icon">🥈</div>
+      <h4 class="achievement-title">Silver Medal</h4>
+      <p class="achievement-event">INDES 2025</p>
+      <p class="achievement-description">AI-based Halal Food App</p>
+    </div>
+    
+    <div class="achievement-card">
+      <div class="achievement-icon">🥉</div>
+      <h4 class="achievement-title">Bronze Medal</h4>
+      <p class="achievement-event">INDES 2025</p>
+      <p class="achievement-description">Web Donation Management System</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .achievement-card {
+    flex: 1;
+    min-width: 250px;
+    background: var(--gradient-card);
+    border: 1px solid rgba(var(--border), 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .achievement-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: rgba(var(--primary), 0.4);
+  }
+  
+  .achievement-icon {
+    font-size: 4rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  }
+  
+  .achievement-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(var(--text));
+    margin: 0;
+  }
+  
+  .achievement-event {
+    font-size: 1.1rem;
+    color: rgb(var(--primary));
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .achievement-description {
+    font-size: 0.95rem;
+    color: rgb(var(--text-muted));
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .achievement-card {
+      min-width: 100%;
+    }
+  }
+
+  .achievements-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .section-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(75px);
+    opacity: 0.3;
+  }
+
+  .blob-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--primary), 0.6), rgba(var(--primary), 0));
+    top: -150px;
+    left: -100px;
+    animation: float-achievements-1 12s ease-in-out infinite alternate;
+  }
+
+  .blob-2 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(var(--secondary), 0.55), rgba(var(--secondary), 0));
+    bottom: -200px;
+    right: -120px;
+    animation: float-achievements-2 15s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes float-achievements-1 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(40px, 50px) rotate(10deg); }
+  }
+
+  @keyframes float-achievements-2 {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-50px, -30px) rotate(-14deg); }
+  }
+</style>
+
+

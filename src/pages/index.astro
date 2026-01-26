@@ -7,13 +7,17 @@ import { Separator } from "@/components/ui/separator";
 import CardProject from "@/components/LandingPage/CardProject.astro";
 import FormLP from "@/components/LandingPage/FormLP.astro";
 import AboutPage from "@/components/LandingPage/AboutPage.astro";
+import Achievements from "@/components/LandingPage/Achievements.astro";
+import WorkExperience from "@/components/LandingPage/WorkExperience.astro";
 
 const navLinks = [
   { href: "#greeting", text: "Home" },
   { href: "#about", text: "About" },
-  { href: "#journey", text: "Journey" },
-  { href: "#projects", text: "Project" }, // Add additional sections here
-  { href: "#contact", text: "Contact" }, // Add additional sections here
+  { href: "#projects", text: "Projects" },
+  { href: "#work-experience", text: "Work Experience" },
+  // { href: "#journey", text: "Journey" },
+  { href: "#achievements", text: "Achievements" },
+  { href: "#contact", text: "Contact" },
 ];
 ---
 
@@ -31,18 +35,30 @@ const navLinks = [
   </section>
 
   <Separator />
-
-  <section id="journey">
-    <JourneyTimeline />
-  </section>
-  
-  <Separator />
   
   <section class="overflow-hidden" id="projects">
     <CardProject />
   </section>
+  
   <Separator />
   
+  <section id="work-experience">
+    <WorkExperience />
+  </section>
+  
+  <Separator />
+  
+  <!-- <section id="journey">
+    <JourneyTimeline />
+  </section> -->
+  
+  <Separator />
+  
+  <section id="achievements">
+    <Achievements />
+  </section>
+  
+  <Separator />
   
   <section id="contact">
     <FormLP />
