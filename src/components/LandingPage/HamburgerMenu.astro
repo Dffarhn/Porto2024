@@ -1,8 +1,7 @@
 ---
-// Define any props if needed. Here, no props are necessary as it's a standalone component.
 ---
 
-<button class="hamburger" id="hamburger" aria-label="Menu">
+<button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav-panel">
   <span class="hamburger-line"></span>
   <span class="hamburger-line"></span>
   <span class="hamburger-line"></span>
@@ -18,8 +17,10 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 0;
-    z-index: 10;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    z-index: 110;
+    position: relative;
   }
 
   .hamburger-line {
@@ -42,19 +43,9 @@
     transform: rotate(-45deg);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     .hamburger {
       display: flex;
     }
   }
 </style>
-
-<script>
-  const hamburger = document.getElementById('hamburger');
-  
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    // Add your menu toggle logic here
-  });
-</script>
-  

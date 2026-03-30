@@ -4,8 +4,8 @@ import { Image } from "astro:assets";
 const { Social } = Astro.props;
 ---
 
-<div class="social-container flex flex-col items-center w-full bg-white p-4 rounded-lg shadow-md laptop:w-3/6 laptop:p-6">
-  <span class="text-gray-800 text-xl font-semibold mb-4">Connect with me</span>
+<div class="social-container flex flex-col items-center w-full bg-slate-100/95 border border-slate-300/70 p-4 rounded-lg shadow-md backdrop-blur-md laptop:w-3/6 laptop:p-6">
+  <span class="text-slate-800 text-xl font-semibold mb-4">Connect with me</span>
   <ul class="social-list flex gap-8 mt-2 justify-center">
     {
       Social.map((social: { href: string; imgSrc: any; alt: string }) => (

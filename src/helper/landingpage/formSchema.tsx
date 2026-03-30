@@ -34,10 +34,10 @@ export default function FormContact() {
     <div>
       <form
         onSubmit={submit}
-        className="space-y-4 max-w-lg mx-auto p-6 bg-white bg-opacity-60 shadow-md rounded-lg backdrop-blur-lg"
+        className="space-y-4 max-w-lg mx-auto p-6 bg-slate-900/40 border border-white/10 shadow-md rounded-lg backdrop-blur-lg text-slate-100"
       >
         <div className="flex flex-col">
-          <label htmlFor="name" className="text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="text-sm font-medium text-slate-200">
             Name
           </label>
           <input
@@ -46,12 +46,12 @@ export default function FormContact() {
             name="name"
             autoComplete="name"
             required
-            className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 p-2 border border-white/10 rounded-md bg-slate-950/40 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="email" className="text-sm font-medium text-gray-700">
+          <label htmlFor="email" className="text-sm font-medium text-slate-200">
             Email
           </label>
           <input
@@ -60,12 +60,12 @@ export default function FormContact() {
             name="email"
             autoComplete="email"
             required
-            className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 p-2 border border-white/10 rounded-md bg-slate-950/40 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="message" className="text-sm font-medium text-gray-700">
+          <label htmlFor="message" className="text-sm font-medium text-slate-200">
             Message
           </label>
           <textarea
@@ -73,7 +73,7 @@ export default function FormContact() {
             name="message"
             autoComplete="off"
             required
-            className="mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="mt-1 p-2 border border-white/10 rounded-md bg-slate-950/40 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 

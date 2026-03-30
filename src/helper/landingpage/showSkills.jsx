@@ -32,7 +32,7 @@ export function CarouselOrientation({ title,items }) {
               <div className="p-4 transition-transform transform hover:scale-105">
                 <Card className="shadow-lg rounded-lg border border-gray-300 hover:border-blue-500 transition-colors">
                   <CardContent className="flex flex-col items-center justify-center space-y-4 p-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg">
-                    <div className="bg-white p-2 rounded-full shadow-md overflow-hidden">
+                    <div className="bg-slate-900/40 border border-white/10 p-2 rounded-full shadow-md overflow-hidden backdrop-blur-md">
                       <img
                         src={item.image}
                         alt={item.nama}

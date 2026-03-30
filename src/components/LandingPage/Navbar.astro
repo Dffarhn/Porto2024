@@ -1,21 +1,39 @@
 ---
 import HamburgerMenu from "./HamburgerMenu.astro";
 
-const { navigasi } = Astro.props;
+interface NavLink {
+  href: string;
+  text: string;
+}
+
+interface Props {
+  navigasi: NavLink[];
+}
+
+const { navigasi } = Astro.props as Props;
 ---
 
-<header class="fixed w-full top-0 z-50">
-  <nav class="glass-nav backdrop-blur-lg">
+<header class="site-header" id="site-header">
+  <nav class="glass-nav backdrop-blur-lg" aria-label="Primary">
     <div class="navbar-container">
       <div class="navbar-logo">
-        <a href="/" class="logo-link">
-          <span class="logo-text">Dffa</span>
+        <a href="/" class="logo-link" aria-label="Dffa Raihan  Home">
+          <img
+            src="/logo.png"
+            alt=""
+            width="36"
+            height="36"
+            class="logo-img"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <span class="logo-text">Daffa</span>
           <span class="logo-gradient">Raihan</span>
         </a>
       </div>
 
       <div class="navbar-links">
-        <ul class="navbar-menu">
+        <ul class="navbar-menu" id="desktop-nav-menu">
           {navigasi.map((link) => (
             <li class="navbar-item">
               <a href={link.href} class="navbar-link group">
@@ -25,40 +43,92 @@ const { navigasi } = Astro.props;
             </li>
           ))}
         </ul>
-        <div class="mobile-menu">
+        <div class="mobile-menu-toggle">
           <HamburgerMenu />
         </div>
       </div>
     </div>
   </nav>
+
+  <!-- Mobile: backdrop + panel (controlled by script) -->
+  <div
+    id="mobile-nav-backdrop"
+    class="mobile-nav-backdrop"
+    aria-hidden="true"
+    hidden
+  ></div>
+  <div
+    id="mobile-nav-panel"
+    class="mobile-nav-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+    aria-hidden="true"
+    hidden
+  >
+    <ul class="mobile-nav-list">
+      {navigasi.map((link) => (
+        <li>
+          <a href={link.href} class="mobile-nav-link">{link.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </header>
 
 <style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
   .glass-nav {
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
 
   .navbar-container {
     max-width: 1900px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    min-height: 3.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .navbar-container {
+      padding: 0.875rem 1.5rem;
+    }
   }
 
   .logo-link {
     text-decoration: none;
     display: flex;
     align-items: center;
-    font-family: 'Poppins', sans-serif;
+    gap: 0.5rem;
+    font-family: "Poppins", sans-serif;
     font-weight: 700;
-    font-size: 1.75rem;
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     letter-spacing: -0.025em;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: clamp(1.75rem, 4vw, 2.25rem);
+    width: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 10px;
   }
 
   .logo-text {
@@ -72,12 +142,24 @@ const { navigasi } = Astro.props;
     margin-left: 4px;
   }
 
-  .navbar-menu {
+  .navbar-links {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .navbar-menu {
+    display: none;
     list-style: none;
     margin: 0;
     padding: 0;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 1.2vw, 1.25rem);
+    row-gap: 0.25rem;
   }
 
   .navbar-link {
@@ -85,8 +167,10 @@ const { navigasi } = Astro.props;
     color: rgb(var(--text));
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
+    font-size: clamp(0.8rem, 1vw + 0.55rem, 0.95rem);
+    padding: 0.35rem 0;
+    white-space: nowrap;
+    transition: color 0.2s ease;
   }
 
   .link-underline {
@@ -99,40 +183,190 @@ const { navigasi } = Astro.props;
     transition: width 0.3s ease;
   }
 
-  .navbar-link:hover .link-underline {
+  .navbar-link:hover .link-underline,
+  .navbar-link:focus-visible .link-underline {
     width: 100%;
   }
 
-  .mobile-menu {
-    display: none;
+  .navbar-link:focus-visible {
+    outline: 2px solid rgba(var(--primary), 0.5);
+    outline-offset: 4px;
+    border-radius: 4px;
   }
 
-  @media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Desktop / large tablet: horizontal nav */
+  @media (min-width: 1025px) {
     .navbar-menu {
+      display: flex;
+    }
+
+    .mobile-menu-toggle {
       display: none;
     }
-
-    .mobile-menu {
-      display: block;
-    }
   }
 
-  /* Add scroll effect styles */
-  header.scrolled .glass-nav {
-    background: rgba(15, 23, 42, 0.95);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  /* Backdrop + panel (mobile / narrow screens) */
+  .mobile-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    top: var(--nav-offset, 56px);
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+  }
+
+  .mobile-nav-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-panel {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--nav-offset, 56px);
+    z-index: 95;
+    max-height: min(70vh, 520px);
+    overflow-y: auto;
+    background: rgba(15, 23, 42, 0.97);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: transform 0.22s ease, opacity 0.22s ease, visibility 0.22s ease;
+  }
+
+  .mobile-nav-panel.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.85rem 1rem;
+    color: rgb(var(--text));
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    border-radius: 10px;
+    transition: background 0.15s ease;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus-visible {
+    background: rgba(var(--primary), 0.12);
+    outline: none;
+  }
+
+  .site-header.scrolled .glass-nav {
+    background: rgba(10, 15, 24, 0.92);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  body.nav-open {
+    overflow: hidden;
   }
 </style>
 
 <script>
-  // Add scroll effect to navbar
-  const header = document.querySelector('header');
-  
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+  function initNav() {
+    const header = document.getElementById("site-header");
+    const hamburger = document.getElementById("hamburger");
+    const backdrop = document.getElementById("mobile-nav-backdrop");
+    const panel = document.getElementById("mobile-nav-panel");
+
+    function setNavOffset() {
+      const h = header?.offsetHeight ?? 56;
+      document.documentElement.style.setProperty("--nav-offset", `${h}px`);
     }
-  });
+
+    setNavOffset();
+    window.addEventListener("resize", setNavOffset);
+
+    function closeMobileNav() {
+      hamburger?.classList.remove("active");
+      hamburger?.setAttribute("aria-expanded", "false");
+      hamburger?.setAttribute("aria-label", "Open menu");
+      backdrop?.classList.remove("is-open");
+      panel?.classList.remove("is-open");
+      backdrop?.setAttribute("aria-hidden", "true");
+      panel?.setAttribute("aria-hidden", "true");
+      backdrop?.setAttribute("hidden", "");
+      panel?.setAttribute("hidden", "");
+      document.body.classList.remove("nav-open");
+    }
+
+    function openMobileNav() {
+      setNavOffset();
+      hamburger?.classList.add("active");
+      hamburger?.setAttribute("aria-expanded", "true");
+      hamburger?.setAttribute("aria-label", "Close menu");
+      backdrop?.classList.add("is-open");
+      panel?.classList.add("is-open");
+      backdrop?.removeAttribute("hidden");
+      panel?.removeAttribute("hidden");
+      backdrop?.setAttribute("aria-hidden", "false");
+      panel?.setAttribute("aria-hidden", "false");
+      document.body.classList.add("nav-open");
+    }
+
+    function toggleMobileNav() {
+      const open = panel?.classList.contains("is-open");
+      if (open) closeMobileNav();
+      else openMobileNav();
+    }
+
+    hamburger?.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleMobileNav();
+    });
+
+    backdrop?.addEventListener("click", () => closeMobileNav());
+
+    panel?.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => closeMobileNav());
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1025) closeMobileNav();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && panel?.classList.contains("is-open")) {
+        closeMobileNav();
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (!header) return;
+      if (window.scrollY > 50) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    });
+  }
+
+  initNav();
+  document.addEventListener("astro:page-load", initNav);
 </script>

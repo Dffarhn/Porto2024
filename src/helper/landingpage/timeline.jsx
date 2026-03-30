@@ -13,24 +13,25 @@ export default function TimelineContainer() {
   const timelineData = [
     {
       title: "Phase 1",
-      content: `Di SMA kelas 11, saya pertama kali diperkenalkan dengan dunia programming—sebuah dunia yang penuh tantangan dan peluang. Dengan semangat yang tinggi, saya menulis kode pertama saya dalam Python menggunakan perintah sederhana, print("hello world"). Momen ini membuka pintu bagi perjalanan panjang saya dalam pengembangan perangkat lunak.`,
+      content: `In 11th grade I was introduced to programminga world full of challenges and opportunity. I wrote my first Python code with a simple print("hello world"). That moment opened the door to a long journey in software development.`,
       images: ["/journey/python.png", "/journey/vscode.png"],
     },
     {
       title: "Phase 2",
       content:
-        "Saat minat saya pada programming berkembang, saya menyadari bahwa ini lebih dari sekadar hobi—ini adalah passion saya. Dengan tekad yang kuat, saya melanjutkan studi di jurusan Informatika di Universitas Islam Indonesia untuk memperdalam ilmu saya.",
+        "As my interest grew, I realized programming was more than a hobbyit was what I wanted to pursue. I continued my studies in Informatics at Universitas Islam Indonesia to go deeper.",
       images: ["/journey/Figma.png", "/journey/uii.webp"],
     },
     {
       title: "Phase 3",
       content:
-        "Pada semester 3 kuliah, saya mulai memfokuskan minat saya pada bidang backend engineering. Kecintaan saya terhadap algoritma dan struktur data membawa saya untuk mulai membuat RESTful API sebagai langkah awal dalam perjalanan profesional saya.",
+        "By my third semester I focused on backend engineering. My love for algorithms and data structures led me to build RESTful APIs as an early step in my professional path.",
       images: ["/journey/java.png", "/journey/php.png", "/journey/express.png", "/journey/mysql.svg"],
     },
     {
       title: "Phase 4",
-      content: "Saat ini, saya terus mengembangkan pengetahuan saya dengan mempelajari framework yang lebih terstruktur dan mengeksplorasi peran frontend engineering, memperluas keahlian saya dalam pengembangan aplikasi secara menyeluruh.",
+      content:
+        "Today I keep leveling up with more structured frameworks and frontend engineering, broadening my skills across the full stack.",
       images: ["/journey/nestjs.png", "/journey/postgresql.png", "/journey/astro.png", "/journey/tailwind.webp"],
     },
   ];

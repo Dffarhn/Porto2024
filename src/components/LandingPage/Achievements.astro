@@ -1,4 +1,30 @@
 ---
+const achievements = [
+  {
+    icon: "🎓",
+    title: "Research Assistant Scholarship",
+    event: "S2 Informatika  UII",
+    lines: ["Fully funded"],
+  },
+  {
+    icon: "🥇",
+    title: "Gold Pin Award",
+    event: "Top Graduate",
+    lines: ["Highest distinction undergraduate"],
+  },
+  {
+    icon: "🥈",
+    title: "Silver Medal",
+    event: "INDES 2025",
+    lines: ["Project: HalalMate", "International competition (Malaysia)"],
+  },
+  {
+    icon: "🏆",
+    title: "Best Paper",
+    event: "Automata 2025",
+    lines: ["Topic: XAI-based halal detection system"],
+  },
+];
 ---
 
 <div class="achievements-section">
@@ -6,95 +32,169 @@
     <div class="gradient-blob blob-1"></div>
     <div class="gradient-blob blob-2"></div>
   </div>
-  <div class="flex flex-col items-center my-24 text-white w-full px-6 relative z-10">
-  <div class="mb-8 text-center w-full">
-    <h3 class="text-3xl laptop:text-5xl font-bold mb-4">Achievements & Awards</h3>
-    <p class="text-lg laptop:text-xl text-gray-400">Pencapaian dan penghargaan yang telah saya raih</p>
-  </div>
-  
-  <div class="flex flex-col laptop:flex-row gap-6 justify-center w-full max-w-5xl">
-    <div class="achievement-card">
-      <div class="achievement-icon">🏆</div>
-      <h4 class="achievement-title">Best Paper Award</h4>
-      <p class="achievement-event">Automata 2025</p>
-      <p class="achievement-description">Penghargaan untuk paper terbaik dalam konferensi Automata 2025</p>
+  <div class="achievements-inner">
+    <div class="section-header">
+      <h3 class="section-title">Achievements & Awards</h3>
+      <p class="section-subtitle">Highlights from competitions, research, and academics</p>
     </div>
-    
-    <div class="achievement-card">
-      <div class="achievement-icon">🥈</div>
-      <h4 class="achievement-title">Silver Medal</h4>
-      <p class="achievement-event">INDES 2025</p>
-      <p class="achievement-description">AI-based Halal Food App</p>
-    </div>
-    
-    <div class="achievement-card">
-      <div class="achievement-icon">🥉</div>
-      <h4 class="achievement-title">Bronze Medal</h4>
-      <p class="achievement-event">INDES 2025</p>
-      <p class="achievement-description">Web Donation Management System</p>
+
+    <div class="achievements-grid">
+      {achievements.map((a) => (
+        <article class="achievement-card">
+          <div class="achievement-icon" aria-hidden="true">{a.icon}</div>
+          <h4 class="achievement-title">{a.title}</h4>
+          <p class="achievement-event">{a.event}</p>
+          <div class="achievement-lines">
+            {a.lines.map((line) => (
+              <p class="achievement-line">{line}</p>
+            ))}
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </div>
 
 <style>
+  .achievements-section {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin: 6rem 0;
+  }
+
+  .achievements-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem 0;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: rgb(var(--text-muted));
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .achievements-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .achievement-card {
+      padding: 1.25rem 1rem;
+      border-radius: 16px;
+    }
+
+    .achievement-icon {
+      font-size: 2.5rem;
+    }
+
+    .achievement-title {
+      font-size: 1.05rem;
+    }
+
+    .achievement-line {
+      font-size: 0.85rem;
+    }
+  }
+
   .achievement-card {
-    flex: 1;
-    min-width: 250px;
     background: var(--gradient-card);
     border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 18px;
+    padding: 1.75rem 1.5rem;
     text-align: center;
     transition: all var(--transition-normal);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
   }
-  
+
+  .achievement-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 50% 0%,
+      rgba(var(--primary), 0.12),
+      transparent 55%
+    );
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .achievement-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .achievement-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.4);
+    border-color: rgba(var(--primary), 0.35);
   }
-  
+
   .achievement-icon {
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 1;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
   }
-  
+
   .achievement-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: rgb(var(--text));
     margin: 0;
+    line-height: 1.3;
   }
-  
+
   .achievement-event {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: rgb(var(--primary));
     font-weight: 600;
     margin: 0;
   }
-  
-  .achievement-description {
-    font-size: 0.95rem;
-    color: rgb(var(--text-muted));
-    line-height: 1.6;
-    margin: 0;
-  }
-  
-  @media (max-width: 768px) {
-    .achievement-card {
-      min-width: 100%;
-    }
+
+  .achievement-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
   }
 
-  .achievements-section {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
+  .achievement-line {
+    font-size: 0.9rem;
+    color: rgb(var(--text-muted));
+    line-height: 1.55;
+    margin: 0;
   }
 
   .section-background {
@@ -108,8 +208,8 @@
   .gradient-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(75px);
-    opacity: 0.3;
+    filter: blur(60px);
+    opacity: 0.11;
   }
 
   .blob-1 {
@@ -140,5 +240,3 @@
     100% { transform: translate(-50px, -30px) rotate(-14deg); }
   }
 </style>
-
-

@@ -24,7 +24,7 @@ const allTechStack = [
   <div class="about-header">
     <h2 class="about-title">About</h2>
     <p class="about-intro">
-      Saya tidak hanya menggunakan tools, tetapi memahami bagaimana tools tersebut digunakan untuk menyelesaikan masalah nyata di production.
+      I don't just use tools  I understand how they solve real problems in production.
     </p>
   </div>
 
@@ -33,13 +33,15 @@ const allTechStack = [
       <div class="about-text-container">
         <div class="about-text">
           <p class="about-paragraph">
-            Saya adalah mahasiswa Informatika dengan pengalaman membangun dan men-deploy berbagai sistem end-to-end: web, mobile, backend services, dan AI-powered applications.
+            I'm an Informatics student with experience building and shipping end-to-end systems: web, mobile,
+            backend services, and AI-powered applications.
           </p>
           <p class="about-paragraph">
-            Saya terbiasa bekerja dengan real production environment, menangani automation, CI/CD, database design, hingga scalable backend architecture.
+            I'm used to real production environments  automation, CI/CD, database design, and scalable
+            backend architecture.
           </p>
           <p class="about-paragraph">
-            Fokus saya adalah membangun sistem yang scalable, maintainable, dan berdampak langsung ke user.
+            My focus is building systems that are scalable, maintainable, and impactful for users.
           </p>
         </div>
       </div>
@@ -96,14 +98,14 @@ const allTechStack = [
   .gradient-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
+    filter: blur(55px);
+    opacity: 0.12;
   }
 
   .blob-1 {
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(var(--primary), 0.6), rgba(var(--primary), 0));
+    background: radial-gradient(circle, rgba(var(--primary), 0.35), rgba(var(--primary), 0));
     top: -150px;
     right: -100px;
     animation: float-about-1 12s ease-in-out infinite alternate;
@@ -112,7 +114,7 @@ const allTechStack = [
   .blob-2 {
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(var(--secondary), 0.5), rgba(var(--secondary), 0));
+    background: radial-gradient(circle, rgba(var(--secondary), 0.30), rgba(var(--secondary), 0));
     bottom: -200px;
     left: -150px;
     animation: float-about-2 15s ease-in-out infinite alternate-reverse;
@@ -121,7 +123,7 @@ const allTechStack = [
   .blob-3 {
     width: 350px;
     height: 350px;
-    background: radial-gradient(circle, rgba(var(--accent), 0.4), rgba(var(--accent), 0));
+    background: radial-gradient(circle, rgba(var(--accent), 0.22), rgba(var(--accent), 0));
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -340,7 +342,7 @@ const allTechStack = [
     }
 
     .about-stats-container {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
     }
 

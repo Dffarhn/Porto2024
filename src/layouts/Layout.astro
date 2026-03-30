@@ -5,28 +5,118 @@ interface Props {
   title: string;
   description?: string;
   keywords?: string;
+  imagePath?: string;
+  twitterHandle?: string;
 }
 
-const { title, description = "Full Stack Engineer yang membangun scalable systems dan AI-powered products. Pengalaman end-to-end development dari system design, CI/CD automation, hingga AI integration dengan real users.", keywords = "full stack engineer, backend engineer, AI-powered systems, scalable systems, CI/CD automation, Golang, Node.js, Flutter, OpenAI, production systems, system design, automation platform" } = Astro.props;
+const {
+  title,
+  description = "Daffa Raihan is a full‑stack developer building scalable systems and AI-powered products. End-to-end experience from system design and CI/CD automation to production-ready web and backend services.",
+  keywords = "daffa raihan, daffaraihan, daffa raihan portfolio, daffa raihan uii, universitas islam indonesia, uii informatics, full stack developer, full stack engineer, software engineer, backend engineer, nestjs, golang, next.js, postgresql, mysql, supabase, firebase, ci/cd, system design, indes 2025, automata 2025, xai, explainable ai",
+  imagePath = "/logo.png",
+  twitterHandle,
+} = Astro.props;
+
+const canonicalURL = Astro.site
+  ? new URL(Astro.url.pathname + Astro.url.search, Astro.site).href
+  : Astro.url.href;
+const ogImageURL = new URL(imagePath, (Astro.site ?? Astro.url.origin)).href;
+
+const sameAs = [
+  "https://instagram.com/dffar.hn",
+  "https://github.com/Dffarhn",
+  "https://linkedin.com/in/dapdap",
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${canonicalURL}#person`,
+      name: "Daffa Raihan",
+      alternateName: ["Muhammad Daffa Raihan", "Daffaraihan"],
+      url: canonicalURL,
+      image: ogImageURL,
+      jobTitle: "Full-stack Developer",
+      alumniOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universitas Islam Indonesia",
+          alternateName: "UII",
+        },
+      ],
+      sameAs,
+      knowsAbout: [
+        "Full-stack development",
+        "Backend engineering",
+        "System design",
+        "CI/CD",
+        "NestJS",
+        "Golang",
+        "Next.js",
+        "PostgreSQL",
+        "Supabase",
+        "Firebase",
+        "Explainable AI (XAI)",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${canonicalURL}#website`,
+      name: "Daffa Raihan",
+      url: canonicalURL,
+      inLanguage: "en",
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalURL}#webpage`,
+      url: canonicalURL,
+      name: title,
+      isPartOf: { "@id": `${canonicalURL}#website` },
+      about: { "@id": `${canonicalURL}#person` },
+      inLanguage: "en",
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Daffa Raihan" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="path-to-your-image.jpg" />
-    <meta property="og:url" content="https://yourwebsite.com" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:alt" content="Daffa Raihan  Full-stack Developer portfolio" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Daffa Raihan" />
+    <meta property="og:locale" content="en_US" />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="path-to-your-image.jpg" />
+    <meta property="twitter:image" content={ogImageURL} />
+    <meta property="twitter:image:alt" content="Daffa Raihan  Full-stack Developer portfolio" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:domain" content="daffaraihan.vercel.app" />
+    {twitterHandle ? (
+      <>
+        <meta property="twitter:site" content={twitterHandle} />
+        <meta property="twitter:creator" content={twitterHandle} />
+      </>
+    ) : null}
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
     <title>{title} | Daffa Raihan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,25 +132,25 @@ const { title, description = "Full Stack Engineer yang membangun scalable system
 <style is:global>
   :root {
     /* Enhanced Modern Color Palette */
-    --primary: 56, 189, 248; /* Bright blue */
-    --primary-dark: 14, 165, 233; /* Darker blue */
-    --secondary: 232, 121, 249; /* Purple */
-    --accent: 251, 146, 60; /* Orange */
+    --primary: 96, 165, 250; /* Soft blue */
+    --primary-dark: 59, 130, 246; /* Deeper blue */
+    --secondary: 129, 140, 248; /* Indigo */
+    --accent: 251, 191, 36; /* Amber (muted) */
     --success: 34, 197, 94; /* Green */
     --warning: 234, 179, 8; /* Yellow */
     --error: 239, 68, 68; /* Red */
-    --background: 15, 23, 42; /* Dark blue-gray */
-    --background-light: 30, 41, 59; /* Lighter blue-gray */
-    --background-lighter: 51, 65, 85; /* Even lighter blue-gray */
-    --text: 248, 250, 252; /* Off-white */
-    --text-muted: 203, 213, 225; /* Light gray */
+    --background: 10, 15, 24; /* Near-black navy */
+    --background-light: 17, 24, 39; /* Slate 900-ish */
+    --background-lighter: 30, 41, 59; /* Slate 800-ish */
+    --text: 226, 232, 240; /* Softer white */
+    --text-muted: 148, 163, 184; /* Muted gray */
     --text-dark: 71, 85, 105; /* Dark gray */
     --border: 51, 65, 85; /* Border color */
     
     /* Enhanced Gradients */
     --gradient-primary: linear-gradient(135deg, 
-      rgb(var(--primary)) 0%, 
-      rgb(var(--secondary)) 100%
+      rgba(var(--primary), 0.95) 0%, 
+      rgba(var(--secondary), 0.95) 100%
     );
     --gradient-secondary: linear-gradient(135deg, 
       rgb(var(--secondary)) 0%, 
@@ -68,18 +158,18 @@ const { title, description = "Full Stack Engineer yang membangun scalable system
     );
     --gradient-card: linear-gradient(
       to bottom right,
-      rgba(var(--background-light), 0.8),
-      rgba(var(--background-light), 0.4)
+      rgba(var(--background-light), 0.92),
+      rgba(var(--background-light), 0.62)
     );
     --gradient-hover: linear-gradient(
       to bottom right,
-      rgba(var(--primary), 0.1),
-      rgba(var(--secondary), 0.1)
+      rgba(var(--primary), 0.06),
+      rgba(var(--secondary), 0.05)
     );
     --gradient-border: linear-gradient(
       135deg,
-      rgba(var(--primary), 0.4),
-      rgba(var(--secondary), 0.4)
+      rgba(var(--primary), 0.22),
+      rgba(var(--secondary), 0.18)
     );
 
     /* Shadows */

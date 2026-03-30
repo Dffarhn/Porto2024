@@ -9,6 +9,8 @@ import FormLP from "@/components/LandingPage/FormLP.astro";
 import AboutPage from "@/components/LandingPage/AboutPage.astro";
 import Achievements from "@/components/LandingPage/Achievements.astro";
 import WorkExperience from "@/components/LandingPage/WorkExperience.astro";
+import Education from "@/components/LandingPage/Education.astro";
+import MotionSection from "@/components/LandingPage/MotionSection";
 
 const navLinks = [
   { href: "#greeting", text: "Home" },
@@ -17,33 +19,46 @@ const navLinks = [
   { href: "#work-experience", text: "Work Experience" },
   // { href: "#journey", text: "Journey" },
   { href: "#achievements", text: "Achievements" },
+  { href: "#education", text: "Education" },
   { href: "#contact", text: "Contact" },
 ];
 ---
 
-<Layout title="Portfolio">
+<Layout
+  title="Daffa Raihan  Full‑stack Developer (UII) | Portfolio"
+  description="Daffa Raihan is a full‑stack developer at UII building scalable web and backend systems with NestJS, Golang, Next.js, and PostgreSQLplus AI features used in production. Explore projects, experience, awards, and education."
+  keywords="daffa raihan, daffaraihan, daffa raihan portfolio, daffa raihan uii, universitas islam indonesia, uii informatics, full stack developer, full stack engineer, software engineer, backend engineer, nestjs developer, golang developer, next.js developer, postgresql, ci/cd, system design, indes 2025, automata 2025, explainable ai, xai"
+>
   <Navbar navigasi={navLinks} />
 
   <section id="greeting">
-    <Greeting />
+    <MotionSection client:load variant="hero" className="w-full">
+      <Greeting />
+    </MotionSection>
   </section>
   
   <Separator />
 
   <section id="about">
-    <AboutPage />
+    <MotionSection client:visible className="w-full">
+      <AboutPage />
+    </MotionSection>
   </section>
 
   <Separator />
   
   <section class="overflow-hidden" id="projects">
-    <CardProject />
+    <MotionSection client:visible className="w-full">
+      <CardProject />
+    </MotionSection>
   </section>
   
   <Separator />
   
   <section id="work-experience">
-    <WorkExperience />
+    <MotionSection client:visible className="w-full">
+      <WorkExperience />
+    </MotionSection>
   </section>
   
   <Separator />
@@ -55,21 +70,33 @@ const navLinks = [
   <Separator />
   
   <section id="achievements">
-    <Achievements />
+    <MotionSection client:visible className="w-full">
+      <Achievements />
+    </MotionSection>
+  </section>
+  
+  <Separator />
+
+  <section id="education">
+    <MotionSection client:visible className="w-full">
+      <Education />
+    </MotionSection>
   </section>
   
   <Separator />
   
   <section id="contact">
-    <FormLP />
+    <MotionSection client:visible className="w-full">
+      <FormLP />
+    </MotionSection>
   </section>
 
 
   <a
     id="scrollToTop"
     href="#"
-    class="fixed bottom-5 right-5 bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-110 hidden"
-    onclick="scrollToTop()"
+    class="fixed bottom-5 right-5 z-[9999] pointer-events-auto bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-110 hidden isolate"
+    onclick="scrollToTop(); return false;"
     aria-label="Scroll to top"
   >
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 mx-auto">

@@ -27,7 +27,7 @@ export function CardProjectComponent({ title, subtitle, description, features, t
         
         {features && features.length > 0 && (
           <div>
-            <h4 className="text-sm font-semibold text-blue-400 mb-2">Fitur Utama:</h4>
+            <h4 className="text-sm font-semibold text-blue-400 mb-2">Key features:</h4>
             <ul className="list-disc list-inside text-sm text-gray-300 space-y-1">
               {features.map((feature, index) => (
                 <li key={index}>{feature}</li>
