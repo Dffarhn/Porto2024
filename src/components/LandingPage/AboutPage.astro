@@ -1,361 +1,219 @@
 ---
-import { TechStackScroll } from "@/helper/landingpage/techStackScroll";
-import "@/styles/techStackScroll.css";
-
-const allTechStack = [
-  { image: "/journey/nestjs.png", nama: "NestJS" },
-  { image: "/journey/express.png", nama: "Express" },
-  { image: "/journey/golang.png", nama: "Golang" },
-  { image: "/journey/nextjs.png", nama: "Next.js" },
-  { image: "/journey/vite.png", nama: "Vite" },
-  { image: "/journey/postgresql.png", nama: "PostgreSQL" },
-  { image: "/journey/mysql.svg", nama: "MySQL" },
-  { image: "/journey/supabase.png", nama: "Supabase" },
-  { image: "/journey/firebase.png", nama: "Firebase" },
+const stats = [
+  { value: "5+", label: "years building software" },
+  { value: "10", label: "production systems shipped" },
+  { value: "150+", label: "students mentored" },
+  { value: "2", label: "awards earned" },
 ];
+
+const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "OpenAI", "CI/CD"];
 ---
 
-<div class="about-section">
-  <div class="section-background">
-    <div class="gradient-blob blob-1"></div>
-    <div class="gradient-blob blob-2"></div>
-    <div class="gradient-blob blob-3"></div>
-  </div>
-  <div class="about-header">
-    <h2 class="about-title">About</h2>
-    <p class="about-intro">
-      I don't just use tools  I understand how they solve real problems in production.
-    </p>
-  </div>
+<div class="profile-section">
+  <div class="profile-inner">
+    <header class="section-heading">
+      <p class="section-index">01 / Profile</p>
+      <h2>I work where complex systems meet <em>clear experiences.</em></h2>
+    </header>
 
-  <div class="about-content">
-    <div class="about-main">
-      <div class="about-text-container">
-        <div class="about-text">
-          <p class="about-paragraph">
-            I'm an Informatics student with experience building and shipping end-to-end systems: web, mobile,
-            backend services, and AI-powered applications.
-          </p>
-          <p class="about-paragraph">
-            I'm used to real production environments  automation, CI/CD, database design, and scalable
-            backend architecture.
-          </p>
-          <p class="about-paragraph">
-            My focus is building systems that are scalable, maintainable, and impactful for users.
-          </p>
-        </div>
+    <div class="profile-grid">
+      <div class="profile-statement">
+        <p class="lead">
+          I’m an informatics researcher and full-stack engineer building end-to-end products:
+          backend services, web platforms, mobile systems, and applied AI.
+        </p>
+        <p>
+          My work goes beyond getting a feature to run. I care about the architecture behind it,
+          the deployment path around it, and whether it creates measurable value after launch.
+        </p>
       </div>
 
-      <div class="about-stats-container">
-        <div class="stat-card">
-          <div class="stat-icon">📊</div>
-          <div class="stat-number">45+</div>
-          <div class="stat-label">Active Projects</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">👥</div>
-          <div class="stat-number">3.9K+</div>
-          <div class="stat-label">Real Users</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">✅</div>
-          <div class="stat-number">82%</div>
-          <div class="stat-label">Success Rate</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🎓</div>
-          <div class="stat-number">150+</div>
-          <div class="stat-label">Students Mentored</div>
-        </div>
+      <div class="stats-grid" aria-label="Career highlights">
+        {stats.map((stat) => (
+          <article class="stat">
+            <strong>{stat.value}</strong>
+            <span>{stat.label}</span>
+          </article>
+        ))}
       </div>
     </div>
 
-    <div class="tech-stack-section">
-      <h3 class="tech-stack-title">Tech Stack</h3>
-      <TechStackScroll items={allTechStack} client:load />
+    <div class="stack-row">
+      <p>Core toolkit</p>
+      <ul>
+        {stack.map((item) => <li>{item}</li>)}
+      </ul>
     </div>
   </div>
 </div>
 
 <style>
-  .about-section {
-    width: 100%;
-    max-width: 1400px;
-    margin: 6rem auto;
-    padding: 0 1.5rem;
-    position: relative;
-    overflow: hidden;
+  .profile-section {
+    padding: clamp(5rem, 10vw, 9rem) 1.5rem;
+    background: var(--dark-surface);
+    color: var(--on-dark);
   }
 
-  .section-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .gradient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(55px);
-    opacity: 0.12;
-  }
-
-  .blob-1 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(var(--primary), 0.35), rgba(var(--primary), 0));
-    top: -150px;
-    right: -100px;
-    animation: float-about-1 12s ease-in-out infinite alternate;
-  }
-
-  .blob-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(var(--secondary), 0.30), rgba(var(--secondary), 0));
-    bottom: -200px;
-    left: -150px;
-    animation: float-about-2 15s ease-in-out infinite alternate-reverse;
-  }
-
-  .blob-3 {
-    width: 350px;
-    height: 350px;
-    background: radial-gradient(circle, rgba(var(--accent), 0.22), rgba(var(--accent), 0));
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: float-about-3 10s ease-in-out infinite alternate;
-  }
-
-  @keyframes float-about-1 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(30px, 40px) rotate(15deg); }
-  }
-
-  @keyframes float-about-2 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(-40px, 30px) rotate(-10deg); }
-  }
-
-  @keyframes float-about-3 {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-45%, -55%) rotate(20deg); }
-  }
-
-  .about-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .about-title {
-    font-size: 3rem;
-    font-weight: 700;
-    color: rgb(var(--text));
-    margin: 0 0 1.5rem 0;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .about-intro {
-    font-size: 1.125rem;
-    color: rgb(var(--text-muted));
-    line-height: 1.7;
-    max-width: 800px;
+  .profile-inner {
+    max-width: 1380px;
     margin: 0 auto;
   }
 
-  .about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    align-items: stretch;
-    position: relative;
-    z-index: 1;
-  }
-
-  .about-main {
+  .section-heading {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
+    grid-template-columns: minmax(150px, 0.35fr) 1.65fr;
+    gap: 2rem;
+    padding-bottom: clamp(3rem, 7vw, 6rem);
+    border-bottom: 1px solid rgba(242, 240, 232, 0.28);
   }
 
-  .about-text-container {
-    background: var(--gradient-card);
-    border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 20px;
-    padding: 2.5rem;
-    transition: all var(--transition-normal);
-  }
-
-  .about-text-container:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.4);
-  }
-
-  .about-stats-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .stat-card {
-    background: var(--gradient-card);
-    border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 16px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    transform: scaleX(0);
-    transition: transform var(--transition-normal);
-  }
-
-  .stat-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.4);
-  }
-
-  .stat-card:hover::before {
-    transform: scaleX(1);
-  }
-
-  .stat-icon {
-    font-size: 2rem;
-    line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  }
-
-  .stat-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 0.875rem;
-    color: rgb(var(--text-muted));
-    font-weight: 500;
+  .section-index {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--on-dark-muted);
   }
 
-  .about-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .about-paragraph {
-    font-size: 1.0625rem;
-    color: rgb(var(--text));
-    line-height: 1.8;
+  h2 {
+    max-width: 15ch;
     margin: 0;
+    color: var(--on-dark);
+    font-size: clamp(2.8rem, 6vw, 6.25rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
   }
 
-  .tech-stack-section {
-    background: var(--gradient-card);
-    border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 20px;
-    padding: 2.5rem;
-    transition: all var(--transition-normal);
+  h2 em {
+    color: var(--acid);
+    font-weight: 400;
   }
 
-  .tech-stack-section:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.4);
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(3rem, 7vw, 5rem);
+    padding: clamp(3rem, 7vw, 6rem) 0;
   }
 
-  .tech-stack-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: rgb(var(--text));
-    margin: 0 0 2rem 0;
-    text-align: center;
+  .profile-statement {
+    max-width: 52rem;
+    display: grid;
+    grid-template-columns: minmax(280px, 1.2fr) minmax(240px, 0.8fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: end;
   }
 
-  @media (max-width: 1024px) {
-    .about-title {
-      font-size: 2.5rem;
-    }
-
-    .about-main {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .about-stats-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .profile-statement p {
+    margin: 0;
+    color: var(--on-dark-muted);
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
-  @media (max-width: 768px) {
-    .about-section {
-      margin: 4rem auto;
-      padding: 0 1rem;
-    }
+  .profile-statement .lead {
+    margin-bottom: 0;
+    color: var(--on-dark);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+  }
 
-    .about-title {
-      font-size: 2rem;
-    }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid rgba(242, 240, 232, 0.28);
+    border-bottom: 1px solid rgba(242, 240, 232, 0.28);
+  }
 
-    .about-intro {
-      font-size: 1rem;
-    }
+  .stat {
+    min-height: 155px;
+    padding: 1.4rem 1.5rem;
+    display: grid;
+    align-content: end;
+    gap: 1.25rem;
+    border-right: 1px solid rgba(242, 240, 232, 0.28);
+    transition: color 200ms ease;
+  }
 
-    .about-text-container,
-    .tech-stack-section {
-      padding: 1.5rem;
-    }
+  .stat:first-child {
+    padding-left: 0;
+  }
 
-    .about-paragraph {
-      font-size: 1rem;
-    }
+  .stat:last-child {
+    border-right: 0;
+  }
 
-    .about-stats-container {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
+  .stat > span:last-child {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
 
-    .stat-card {
+  .stat strong {
+    color: var(--on-dark);
+    font-size: clamp(2.6rem, 5vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
+    line-height: 0.9;
+    transition: color 200ms ease;
+  }
+
+  .stat:hover strong {
+    color: var(--acid);
+  }
+
+  .stack-row {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.35fr) 1.65fr;
+    gap: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(242, 240, 232, 0.28);
+  }
+
+  .stack-row p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+
+  .stack-row ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stack-row li {
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(242, 240, 232, 0.3);
+    border-radius: 999px;
+    color: var(--on-dark);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  @media (max-width: 760px) {
+    .profile-section { padding-inline: 1rem; }
+    .section-heading,
+    .profile-statement,
+    .stack-row { grid-template-columns: 1fr; }
+    .profile-grid { gap: 3rem; }
+    .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat {
+      min-height: 130px;
       padding: 1.25rem;
+      border-bottom: 1px solid rgba(242, 240, 232, 0.28);
     }
-
-    .stat-number {
-      font-size: 2rem;
-    }
-
-    .stat-icon {
-      font-size: 1.75rem;
-    }
+    .stat:first-child { padding-left: 1.25rem; }
+    .stat:nth-child(2n) { border-right: 0; }
+    .stat:nth-last-child(-n + 2) { border-bottom: 0; }
   }
 </style>

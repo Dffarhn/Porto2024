@@ -1,0 +1,586 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/LandingPage/Navbar.astro";
+import { getProjectBySlug, projects } from "@/data/projects";
+import type { Project } from "@/data/projects";
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug ?? "");
+
+if (!project) {
+  return Astro.redirect("/#projects");
+}
+
+const navLinks = [
+  { href: "/", text: "Home" },
+  { href: "/#projects", text: "Projects" },
+  { href: "/#work-experience", text: "Work Experience" },
+  { href: "/#contact", text: "Contact" },
+];
+
+const otherProjects = projects.filter((item) => item.slug !== project.slug).slice(0, 4);
+
+function hostOf(item: Project) {
+  const href = item.links?.[0]?.href;
+  if (!href) return item.slug;
+  try {
+    return new URL(href).host.replace(/^www\./, "");
+  } catch {
+    return item.slug;
+  }
+}
+---
+
+<Layout
+  title={project.title}
+  description={project.shortDescription}
+  keywords={`${project.title}, daffa raihan, portfolio, ${project.techStack.join(", ")}`}
+>
+  <Navbar navigasi={navLinks} />
+
+  <main class="detail-page">
+    <article class="detail-inner">
+      <a class="back-link" href="/#projects">Back to projects</a>
+
+      <header class="detail-hero">
+        <div class="hero-copy">
+          <p class="kicker">
+            {project.subtitle}
+            {project.status === "wip" && <span> · In progress</span>}
+          </p>
+          <h1 class="detail-title">{project.title}</h1>
+          <p class="lead">{project.description}</p>
+
+          <dl class="meta-list">
+            {project.role && (
+              <div>
+                <dt>Role</dt>
+                <dd>{project.role}</dd>
+              </div>
+            )}
+            {project.client && (
+              <div>
+                <dt>Client</dt>
+                <dd>{project.client}</dd>
+              </div>
+            )}
+            {project.impact && (
+              <div>
+                <dt>Impact</dt>
+                <dd>{project.impact}</dd>
+              </div>
+            )}
+          </dl>
+
+          {project.links && project.links.length > 0 && (
+            <div class="link-row">
+              {project.links.map((link) => (
+                <a class="text-link" href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="product-frame" aria-hidden="true">
+          <div class="frame-bar">
+            <span class="frame-dots"></span>
+            <span class="frame-url">{hostOf(project)}</span>
+          </div>
+          {project.img ? (
+            <img class="frame-image" src={project.img} alt="" />
+          ) : (
+            <div class="frame-body">
+              <p class="frame-kicker">{project.subtitle}</p>
+              <p class="frame-metric">{project.impact ?? project.shortDescription}</p>
+              {project.features.length > 0 && (
+                <ul>
+                  {project.features.slice(0, 4).map((feature) => (
+                    <li>{feature}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      </header>
+
+      {project.features.length > 0 && (
+        <section class="detail-section">
+          <h2>What shipped</h2>
+          <ul class="plain-list">
+            {project.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {project.techStack.length > 0 && (
+        <section class="detail-section">
+          <h2>Stack</h2>
+          <p class="mono-line">{project.techStack.join(" / ")}</p>
+        </section>
+      )}
+
+      {project.direction && (
+        <section class="detail-section">
+          <h2>Direction</h2>
+          <p class="body-copy">{project.direction}</p>
+        </section>
+      )}
+
+      {project.coffeeSites && project.coffeeSites.length > 0 && (
+        <section class="detail-section">
+          <h2>The series</h2>
+          <p class="body-copy">{project.coffeeSites.length} coffee shop sites, each with its own visual language.</p>
+          <ol class="series-list">
+            {project.coffeeSites.map((site) => (
+              <li>
+                <div class={`series-row ${site.img ? "has-media" : ""}`}>
+                  {site.img ? (
+                    <div class="site-media">
+                      <img src={site.img} alt={`Screenshot of ${site.name}`} />
+                    </div>
+                  ) : (
+                    <span class="site-num">{site.number}</span>
+                  )}
+                  <div>
+                    <p class="site-num-inline">{site.number}</p>
+                    <h3>{site.name}</h3>
+                    <p>{site.description}</p>
+                    {site.url ? (
+                      <a class="text-link" href={site.url} target="_blank" rel="noopener noreferrer">Visit site</a>
+                    ) : (
+                      <span class="site-soon">Link coming soon</span>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {project.bonusProjects && project.bonusProjects.length > 0 && (
+        <section class="detail-section">
+          <h2>Bonus</h2>
+          <ol class="series-list">
+            {project.bonusProjects.map((site) => (
+              <li>
+                <div class={`series-row ${site.img ? "has-media" : ""}`}>
+                  {site.img ? (
+                    <div class="site-media">
+                      <img src={site.img} alt={`Screenshot of ${site.name}`} />
+                    </div>
+                  ) : (
+                    <span class="site-num">{site.number}</span>
+                  )}
+                  <div>
+                    <p class="site-num-inline">{site.number}</p>
+                    <h3>{site.name}</h3>
+                    <p>{site.description}</p>
+                    {site.url ? (
+                      <a class="text-link" href={site.url} target="_blank" rel="noopener noreferrer">Visit site</a>
+                    ) : (
+                      <span class="site-soon">Link coming soon</span>
+                    )}
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <section class="detail-section more">
+        <h2>More projects</h2>
+        <ul class="more-list">
+          {otherProjects.map((item) => (
+            <li>
+              <a href={`/projects/${item.slug}`}>
+                <span class="more-kicker">{item.subtitle}</span>
+                <strong>{item.title}</strong>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .detail-page {
+    min-height: 100vh;
+    padding: 7rem 0 5rem;
+  }
+
+  .detail-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 2.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .back-link:hover {
+    color: rgb(var(--text));
+    opacity: 1;
+  }
+
+  .detail-hero {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(var(--border), 0.7);
+  }
+
+  .kicker {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .detail-title {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1.05;
+    margin: 0 0 1rem;
+    color: rgb(var(--text));
+  }
+
+  .lead {
+    margin: 0 0 1.5rem;
+    max-width: 40rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgb(var(--text-muted));
+  }
+
+  .meta-list {
+    display: grid;
+    gap: 0.85rem 1.5rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .meta-list dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .meta-list dd {
+    margin: 0.2rem 0 0;
+    color: rgb(var(--text));
+  }
+
+  .link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+  }
+
+  .text-link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: rgb(var(--text));
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .text-link:hover {
+    opacity: 0.7;
+  }
+
+  .product-frame {
+    border: 1px solid rgba(var(--border), 0.8);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgb(var(--background-light));
+  }
+
+  .frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid rgba(var(--border), 0.7);
+  }
+
+  .frame-dots {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgb(var(--border));
+    box-shadow: 12px 0 0 rgb(var(--border)), 24px 0 0 rgb(var(--border));
+  }
+
+  .frame-url {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgb(var(--text-muted));
+  }
+
+  .frame-image {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .frame-body {
+    padding: 1.15rem 1.15rem 1.25rem;
+    min-height: 180px;
+  }
+
+  .frame-kicker {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .frame-metric {
+    margin: 0 0 0.9rem;
+    color: rgb(var(--text));
+    line-height: 1.5;
+  }
+
+  .frame-body ul,
+  .plain-list,
+  .series-list,
+  .more-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .frame-body li {
+    font-size: 0.85rem;
+    color: rgb(var(--text-muted));
+  }
+
+  .frame-body li::before {
+    content: "– ";
+  }
+
+  .detail-section {
+    margin: 2.5rem 0;
+  }
+
+  .detail-section h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    color: rgb(var(--text));
+  }
+
+  .body-copy {
+    margin: 0 0 1.25rem;
+    max-width: 42rem;
+    color: rgb(var(--text-muted));
+    line-height: 1.7;
+  }
+
+  .plain-list {
+    display: grid;
+    gap: 0.55rem;
+    max-width: 40rem;
+  }
+
+  .plain-list li {
+    color: rgb(var(--text));
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .plain-list li::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    color: rgb(var(--text-muted));
+  }
+
+  .mono-line {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: rgb(var(--text-muted));
+  }
+
+  .series-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .series-list li {
+    border-top: 1px solid rgba(var(--border), 0.5);
+    padding: 1.15rem 0;
+  }
+
+  .series-list li:last-child {
+    border-bottom: 1px solid rgba(var(--border), 0.5);
+  }
+
+  .series-row {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+  }
+
+  .series-row.has-media {
+    grid-template-columns: minmax(140px, 220px) 1fr;
+  }
+
+  .site-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--border), 0.5);
+    background: rgba(15, 23, 42, 0.7);
+  }
+
+  .site-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .site-num,
+  .site-num-inline {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgb(var(--text-muted));
+    padding-top: 0.2rem;
+  }
+
+  .site-num-inline {
+    margin: 0 0 0.35rem;
+    padding: 0;
+  }
+
+  .series-row:not(.has-media) .site-num-inline {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .series-row,
+    .series-row.has-media {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .series-row h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    color: rgb(var(--text));
+  }
+
+  .series-row p {
+    margin: 0 0 0.65rem;
+    color: rgb(var(--text-muted));
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .site-soon {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgb(var(--text-muted));
+  }
+
+  .more-list {
+    display: grid;
+    gap: 0;
+  }
+
+  .more-list a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid rgba(var(--border), 0.5);
+    color: inherit;
+  }
+
+  .more-list li:last-child a {
+    border-bottom: 1px solid rgba(var(--border), 0.5);
+  }
+
+  .more-list a:hover {
+    opacity: 1;
+    color: inherit;
+  }
+
+  .more-list a:hover strong {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .more-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgb(var(--text-muted));
+  }
+
+  .more-list strong {
+    font-weight: 600;
+    color: rgb(var(--text));
+  }
+
+  @media (min-width: 860px) {
+    .detail-hero {
+      grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .meta-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .more-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 2rem;
+    }
+
+    .more-list li:nth-child(2) a {
+      border-top: 1px solid rgba(var(--border), 0.5);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .detail-page {
+      padding-top: 6rem;
+    }
+
+    .detail-inner {
+      padding: 0 1rem;
+    }
+  }
+</style>

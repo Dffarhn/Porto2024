@@ -1,242 +1,133 @@
 ---
 const achievements = [
-  {
-    icon: "🎓",
-    title: "Research Assistant Scholarship",
-    event: "S2 Informatika  UII",
-    lines: ["Fully funded"],
-  },
-  {
-    icon: "🥇",
-    title: "Gold Pin Award",
-    event: "Top Graduate",
-    lines: ["Highest distinction undergraduate"],
-  },
-  {
-    icon: "🥈",
-    title: "Silver Medal",
-    event: "INDES 2025",
-    lines: ["Project: HalalMate", "International competition (Malaysia)"],
-  },
-  {
-    icon: "🏆",
-    title: "Best Paper",
-    event: "Automata 2025",
-    lines: ["Topic: XAI-based halal detection system"],
-  },
+  { year: "2026", title: "Research Assistant Scholarship", event: "M.Kom. Informatics · UII", note: "Fully funded" },
+  { year: "2026", title: "Gold Pin Award", event: "Top Graduate", note: "Highest undergraduate distinction" },
+  { year: "2025", title: "Silver Medal", event: "INDES · Malaysia", note: "HalalMate" },
+  { year: "2025", title: "Best Paper", event: "Automata", note: "XAI-based halal detection" },
 ];
 ---
 
-<div class="achievements-section">
-  <div class="section-background">
-    <div class="gradient-blob blob-1"></div>
-    <div class="gradient-blob blob-2"></div>
-  </div>
-  <div class="achievements-inner">
-    <div class="section-header">
-      <h3 class="section-title">Achievements & Awards</h3>
-      <p class="section-subtitle">Highlights from competitions, research, and academics</p>
-    </div>
+<div class="awards-section">
+  <div class="awards-inner">
+    <header>
+      <p class="section-index">05 / Recognition</p>
+      <h2>Work recognized<br />beyond the <em>screen.</em></h2>
+    </header>
 
-    <div class="achievements-grid">
-      {achievements.map((a) => (
-        <article class="achievement-card">
-          <div class="achievement-icon" aria-hidden="true">{a.icon}</div>
-          <h4 class="achievement-title">{a.title}</h4>
-          <p class="achievement-event">{a.event}</p>
-          <div class="achievement-lines">
-            {a.lines.map((line) => (
-              <p class="achievement-line">{line}</p>
-            ))}
+    <ol class="awards-list">
+      {achievements.map((award, index) => (
+        <li>
+          <span class="award-index">A{index + 1}</span>
+          <div>
+            <p class="award-event">{award.event}</p>
+            <h3>{award.title}</h3>
           </div>
-        </article>
+          <p class="award-note">{award.note}</p>
+          <span class="award-year">{award.year}</span>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </div>
 
 <style>
-  .achievements-section {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    margin: 6rem 0;
+  .awards-section {
+    padding: clamp(5rem, 10vw, 9rem) 1.5rem;
+    background: var(--signal-surface);
+    color: white;
   }
 
-  .achievements-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
+  .awards-inner {
+    max-width: 1380px;
     margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-
-  .section-title {
-    font-size: clamp(1.75rem, 4vw, 3rem);
-    font-weight: 700;
-    margin: 0 0 0.75rem 0;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .section-subtitle {
-    font-size: 1.05rem;
-    color: rgb(var(--text-muted));
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: minmax(280px, 0.8fr) 1.2fr;
+    gap: clamp(3rem, 8vw, 8rem);
   }
 
-  @media (max-width: 640px) {
-    .achievements-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .achievement-card {
-      padding: 1.25rem 1rem;
-      border-radius: 16px;
-    }
-
-    .achievement-icon {
-      font-size: 2.5rem;
-    }
-
-    .achievement-title {
-      font-size: 1.05rem;
-    }
-
-    .achievement-line {
-      font-size: 0.85rem;
-    }
+  .section-index {
+    margin: 0 0 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #e0e5ff;
   }
 
-  .achievement-card {
-    background: var(--gradient-card);
-    border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 18px;
-    padding: 1.75rem 1.5rem;
-    text-align: center;
-    transition: all var(--transition-normal);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .achievement-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 50% 0%,
-      rgba(var(--primary), 0.12),
-      transparent 55%
-    );
-    opacity: 0.55;
-    pointer-events: none;
-  }
-
-  .achievement-card > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .achievement-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.35);
-  }
-
-  .achievement-icon {
-    font-size: 3rem;
-    line-height: 1;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
-  }
-
-  .achievement-title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: rgb(var(--text));
+  h2 {
+    position: sticky;
+    top: 7rem;
     margin: 0;
-    line-height: 1.3;
+    max-width: 11ch;
+    color: white;
+    font-size: clamp(3rem, 5.8vw, 6rem);
+    font-weight: 500;
+    letter-spacing: -0.075em;
+    line-height: 0.92;
   }
 
-  .achievement-event {
-    font-size: 0.95rem;
-    color: rgb(var(--primary));
-    font-weight: 600;
+  h2 em {
+    color: var(--acid);
+    font-weight: 400;
+  }
+
+  .awards-list {
     margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
   }
 
-  .achievement-lines {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    width: 100%;
+  .awards-list li {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr minmax(130px, 0.55fr) auto;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+    transition: padding 180ms ease, background 180ms ease;
   }
 
-  .achievement-line {
-    font-size: 0.9rem;
-    color: rgb(var(--text-muted));
-    line-height: 1.55;
+  .awards-list li:hover {
+    padding-inline: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .award-index,
+  .award-year,
+  .award-event {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    text-transform: uppercase;
+    color: #e0e5ff;
+  }
+
+  .award-event { margin: 0 0 0.45rem; }
+  .award-year { text-align: right; }
+
+  h3 {
     margin: 0;
+    color: white;
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
   }
 
-  .section-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
+  .award-note {
+    margin: 0;
+    color: #edf0ff;
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
-  .gradient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.11;
+  @media (max-width: 820px) {
+    .awards-inner { grid-template-columns: 1fr; }
+    h2 { position: static; }
   }
 
-  .blob-1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(var(--primary), 0.6), rgba(var(--primary), 0));
-    top: -150px;
-    left: -100px;
-    animation: float-achievements-1 12s ease-in-out infinite alternate;
-  }
-
-  .blob-2 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(var(--secondary), 0.55), rgba(var(--secondary), 0));
-    bottom: -200px;
-    right: -120px;
-    animation: float-achievements-2 15s ease-in-out infinite alternate-reverse;
-  }
-
-  @keyframes float-achievements-1 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(40px, 50px) rotate(10deg); }
-  }
-
-  @keyframes float-achievements-2 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(-50px, -30px) rotate(-14deg); }
+  @media (max-width: 620px) {
+    .awards-section { padding-inline: 1rem; }
+    .awards-list li { grid-template-columns: 2rem 1fr auto; }
+    .award-note { grid-column: 2 / -1; }
   }
 </style>

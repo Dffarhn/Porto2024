@@ -20,14 +20,14 @@ export default function MotionSection({
 }: Props) {
   const reduceMotion = useReducedMotion();
   const off = reduceMotion === true;
-  const dur = off ? 0 : variant === "hero" ? 0.65 : 0.55;
+  const dur = off ? 0 : variant === "hero" ? 0.45 : 0.38;
   const d = off ? 0 : delay;
 
   if (variant === "hero") {
     return (
       <motion.div
         className={className}
-        initial={off ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+        initial={off ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: dur, delay: d, ease }}
       >
@@ -39,9 +39,9 @@ export default function MotionSection({
   return (
     <motion.div
       className={className}
-      initial={off ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      initial={off ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px 0px -40px 0px", amount: 0.15 }}
+      viewport={{ once: true, margin: "-30px 0px -20px 0px", amount: 0.1 }}
       transition={{ duration: dur, delay: d, ease }}
     >
       {children}

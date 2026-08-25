@@ -2,8 +2,6 @@
 import Navbar from "../components/LandingPage/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import Greeting from "../components/LandingPage/Greeting.astro";
-import JourneyTimeline from "../components/LandingPage/JourneyTimeline.astro";
-import { Separator } from "@/components/ui/separator";
 import CardProject from "@/components/LandingPage/CardProject.astro";
 import FormLP from "@/components/LandingPage/FormLP.astro";
 import AboutPage from "@/components/LandingPage/AboutPage.astro";
@@ -13,13 +11,9 @@ import Education from "@/components/LandingPage/Education.astro";
 import MotionSection from "@/components/LandingPage/MotionSection";
 
 const navLinks = [
-  { href: "#greeting", text: "Home" },
-  { href: "#about", text: "About" },
-  { href: "#projects", text: "Projects" },
-  { href: "#work-experience", text: "Work Experience" },
-  // { href: "#journey", text: "Journey" },
-  { href: "#achievements", text: "Achievements" },
-  { href: "#education", text: "Education" },
+  { href: "#projects", text: "Work" },
+  { href: "#about", text: "Profile" },
+  { href: "#work-experience", text: "Experience" },
   { href: "#contact", text: "Contact" },
 ];
 ---
@@ -37,23 +31,16 @@ const navLinks = [
     </MotionSection>
   </section>
   
-  <Separator />
-
   <section id="about">
     <MotionSection client:visible className="w-full">
       <AboutPage />
     </MotionSection>
   </section>
 
-  <Separator />
-  
   <section class="overflow-hidden" id="projects">
-    <MotionSection client:visible className="w-full">
-      <CardProject />
-    </MotionSection>
+    <!-- Project cards + 1 Coffee 1 Web series -->
+    <CardProject />
   </section>
-  
-  <Separator />
   
   <section id="work-experience">
     <MotionSection client:visible className="w-full">
@@ -61,29 +48,17 @@ const navLinks = [
     </MotionSection>
   </section>
   
-  <Separator />
-  
-  <!-- <section id="journey">
-    <JourneyTimeline />
-  </section> -->
-  
-  <Separator />
-  
   <section id="achievements">
     <MotionSection client:visible className="w-full">
       <Achievements />
     </MotionSection>
   </section>
   
-  <Separator />
-
   <section id="education">
     <MotionSection client:visible className="w-full">
       <Education />
     </MotionSection>
   </section>
-  
-  <Separator />
   
   <section id="contact">
     <MotionSection client:visible className="w-full">
@@ -95,7 +70,7 @@ const navLinks = [
   <a
     id="scrollToTop"
     href="#"
-    class="fixed bottom-5 right-5 z-[9999] pointer-events-auto bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-110 hidden isolate"
+    class="fixed bottom-5 right-5 z-[9999] pointer-events-auto bg-[#161713] text-white p-3 rounded-full border border-black/10 hover:bg-[#3157ff] focus:outline-none focus:ring-2 focus:ring-[#3157ff]/30 transition-colors duration-200 hidden isolate"
     onclick="scrollToTop(); return false;"
     aria-label="Scroll to top"
   >

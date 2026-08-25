@@ -1,397 +1,201 @@
 ---
 const education = [
   {
-    degree: "M.Kom. Informatics - Universitas Islam Indonesia (UII)",
-    meta: "Apr 2026 – Apr 2028 (Expected) · Research Assistant Scholarship (Fully funded)",
-    tags: ["Master's", "Expected 2028", "Fully funded"],
-    bullets: [
-      "Research focus: AI, Big Data, Deep Learning, and Explainable AI (XAI).",
-      "Building end-to-end research prototypes from data pipelines to deployable demos.",
-    ],
+    level: "Master’s",
+    period: "2026 — 2028",
+    degree: "M.Kom. Informatics",
+    school: "Universitas Islam Indonesia",
+    note: "Research Assistant Scholarship · Fully funded",
+    focus: "AI, Big Data, Deep Learning, Explainable AI",
   },
   {
-    degree: "S.Kom. Informatics - Universitas Islam Indonesia (UII)",
-    meta: "Aug 2022 – Jan 2026 · GPA 3.97 / 4.00 · Graduated Cum Laude",
-    tags: ["Bachelor's", "Cum Laude", "High GPA"],
-    bullets: [
-      "Completed an accelerated study period while maintaining top academic performance.",
-      "Leadership & communities: Programming Study Club and Google Developer Student Club (GDSC).",
-    ],
+    level: "Bachelor’s",
+    period: "2022 — 2026",
+    degree: "S.Kom. Informatics",
+    school: "Universitas Islam Indonesia",
+    note: "GPA 3.97 / 4.00 · Cum Laude · Gold Pin",
+    focus: "Software engineering, distributed systems, applied AI",
   },
   {
-    degree: "MAN Insan Cendekia",
-    meta: "Aug 2019 – Aug 2022 · GPA 88 / 100",
-    tags: ["High school", "STEM track"],
-    bullets: [
-      "Strengthened fundamentals in math and problem-solving through competitive practice.",
-      "Extracurricular: Math Club.",
-    ],
+    level: "High school",
+    period: "2019 — 2022",
+    degree: "STEM Program",
+    school: "MAN Insan Cendekia",
+    note: "GPA 88 / 100",
+    focus: "Mathematics and problem solving",
   },
 ];
 ---
 
 <div class="education-section">
-  <div class="section-background">
-    <div class="gradient-blob blob-1"></div>
-    <div class="gradient-blob blob-2"></div>
-  </div>
+  <div class="education-inner">
+    <header class="section-heading">
+      <p class="section-index">06 / Education</p>
+      <h2>Always building.<br /><em>Always learning.</em></h2>
+    </header>
 
-  <div class="section-header">
-    <h2 class="section-title">Education</h2>
-    <p class="section-subtitle">
-      Academic background and focus areas that support end-to-end product development.
-    </p>
-  </div>
-
-  <div class="education-bento">
-    <article class="edu-card featured">
-      <div class="edu-kicker">Featured</div>
-      <div class="edu-header">
-        <h3 class="edu-degree">{education[0].degree}</h3>
-        <div class="edu-tags" aria-label="Tags">
-          {education[0].tags.map((t) => (
-            <span class="edu-tag">{t}</span>
-          ))}
-        </div>
-      </div>
-      <p class="edu-meta">{education[0].meta}</p>
-      <ul class="edu-list">
-        {education[0].bullets.map((b) => (
-          <li>{b}</li>
-        ))}
-      </ul>
-      <div class="edu-accent" aria-hidden="true"></div>
-    </article>
-
-    <article class="edu-card">
-      <div class="edu-header">
-        <h3 class="edu-degree">{education[1].degree}</h3>
-        <div class="edu-tags" aria-label="Tags">
-          {education[1].tags.map((t) => (
-            <span class="edu-tag">{t}</span>
-          ))}
-        </div>
-      </div>
-      <p class="edu-meta">{education[1].meta}</p>
-      <ul class="edu-list">
-        {education[1].bullets.map((b) => (
-          <li>{b}</li>
-        ))}
-      </ul>
-    </article>
-
-    <article class="edu-card">
-      <div class="edu-header">
-        <h3 class="edu-degree">{education[2].degree}</h3>
-        <div class="edu-tags" aria-label="Tags">
-          {education[2].tags.map((t) => (
-            <span class="edu-tag">{t}</span>
-          ))}
-        </div>
-      </div>
-      <p class="edu-meta">{education[2].meta}</p>
-      <ul class="edu-list">
-        {education[2].bullets.map((b) => (
-          <li>{b}</li>
-        ))}
-      </ul>
-    </article>
+    <div class="education-grid">
+      {education.map((item, index) => (
+        <article class:list={["education-card", { featured: index === 0 }]}>
+          <div class="card-top">
+            <span>{item.level}</span>
+            <span>{item.period}</span>
+          </div>
+          <div>
+            <h3>{item.degree}</h3>
+            <p class="school">{item.school}</p>
+          </div>
+          <div class="card-bottom">
+            <p>{item.note}</p>
+            <p><span>Focus</span>{item.focus}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   </div>
 </div>
 
 <style>
   .education-section {
-    width: 100%;
-    max-width: 1200px;
-    margin: 6rem auto;
-    padding: 0 1.5rem;
-    position: relative;
-    overflow: hidden;
+    padding: clamp(5rem, 10vw, 9rem) 1.5rem;
+    background: var(--paper);
   }
 
-  .section-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .gradient-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.10;
-  }
-
-  .blob-1 {
-    width: 520px;
-    height: 520px;
-    background: radial-gradient(circle, rgba(var(--primary), 0.33), rgba(var(--primary), 0));
-    top: -220px;
-    right: -160px;
-    animation: float-edu-1 14s ease-in-out infinite alternate;
-  }
-
-  .blob-2 {
-    width: 560px;
-    height: 560px;
-    background: radial-gradient(circle, rgba(var(--secondary), 0.28), rgba(var(--secondary), 0));
-    bottom: -260px;
-    left: -180px;
-    animation: float-edu-2 16s ease-in-out infinite alternate-reverse;
-  }
-
-  @keyframes float-edu-1 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(-40px, 55px) rotate(-10deg); }
-  }
-
-  @keyframes float-edu-2 {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(55px, -35px) rotate(12deg); }
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .section-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .section-subtitle {
-    font-size: 1.125rem;
-    color: rgb(var(--text-muted));
-    line-height: 1.7;
-    max-width: 800px;
+  .education-inner {
+    max-width: 1380px;
     margin: 0 auto;
   }
 
-  .education-bento {
-    position: relative;
-    z-index: 1;
+  .section-heading {
     display: grid;
-    grid-template-columns: 1.35fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1.25rem;
-    align-items: stretch;
+    grid-template-columns: minmax(150px, 0.35fr) 1.65fr;
+    gap: 2rem;
+    margin-bottom: clamp(3rem, 7vw, 6rem);
   }
 
-  .edu-card {
-    background: var(--gradient-card);
-    border: 1px solid rgba(var(--border), 0.2);
-    border-radius: 18px;
-    padding: 2rem;
-    transition: all var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-    min-height: 220px;
-  }
-
-  .edu-card::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    background: var(--gradient-border);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-    filter: blur(0);
-  }
-
-  .edu-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      circle at 20% 0%,
-      rgba(var(--primary), 0.16),
-      rgba(var(--secondary), 0.06) 42%,
-      transparent 72%
-    );
-    opacity: 0.40;
-    pointer-events: none;
-  }
-
-  .edu-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-xl);
-    border-color: rgba(var(--primary), 0.4);
-  }
-
-  .edu-card:hover::before {
-    opacity: 0.25;
-  }
-
-  .edu-kicker,
-  .edu-header,
-  .edu-degree,
-  .edu-meta,
-  .edu-list,
-  .edu-tags,
-  .edu-tag {
-    position: relative;
-    z-index: 1;
-  }
-
-  .edu-card.featured {
-    grid-row: 1 / span 2;
-    border-radius: 22px;
-    padding: 2.25rem;
-    min-height: 460px;
-  }
-
-  .edu-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    font-weight: 700;
+  .section-index {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgb(var(--text));
-    padding: 0.5rem 0.75rem;
-    border-radius: 999px;
-    border: 1px solid rgba(var(--primary), 0.25);
-    background: rgba(var(--background-light), 0.35);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    width: fit-content;
-    margin-bottom: 1rem;
+    color: rgb(var(--text-muted));
   }
 
-  .edu-header {
+  h2 {
+    margin: 0;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 500;
+    letter-spacing: -0.075em;
+    line-height: 0.9;
+  }
+
+  h2 em {
+    color: var(--signal);
+    font-weight: 400;
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 1px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .education-card {
+    min-height: 390px;
+    padding: 1.5rem;
+    display: grid;
+    align-content: space-between;
+    background: var(--paper-light);
+    transition: background 200ms ease, color 200ms ease;
+  }
+
+  .education-card:hover,
+  .education-card.featured {
+    background: var(--acid);
+    color: var(--on-acid);
+  }
+
+  .education-card:hover .card-top,
+  .education-card:hover h3,
+  .education-card:hover .school,
+  .education-card:hover .card-bottom p:last-child,
+  .education-card.featured .card-top,
+  .education-card.featured h3,
+  .education-card.featured .school,
+  .education-card.featured .card-bottom p:last-child {
+    color: var(--on-acid);
+  }
+
+  .education-card:hover .card-top,
+  .education-card:hover .school,
+  .education-card:hover .card-bottom p:last-child,
+  .education-card.featured .card-top,
+  .education-card.featured .school,
+  .education-card.featured .card-bottom p:last-child {
+    color: rgba(22, 23, 19, 0.68);
+  }
+
+  .card-top {
     display: flex;
-    align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
   }
 
-  .edu-degree {
-    font-size: 1.25rem;
-    font-weight: 700;
+  h3 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(2rem, 3vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+  }
+
+  .school {
     margin: 0;
-    color: rgb(var(--text));
-    line-height: 1.25;
+    color: rgb(var(--text-muted));
   }
 
-  .edu-card.featured .edu-degree {
-    font-size: 1.6rem;
-    letter-spacing: -0.02em;
+  .card-bottom {
+    border-top: 1px solid rgba(var(--text), 0.35);
+    padding-top: 1rem;
   }
 
-  .edu-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+  .education-card:hover .card-bottom,
+  .education-card.featured .card-bottom {
+    border-color: rgba(22, 23, 19, 0.35);
   }
 
-  .edu-tag {
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 0.4rem 0.65rem;
-    border-radius: 999px;
-    border: 1px solid rgba(var(--primary), 0.25);
-    background: rgba(var(--background-light), 0.35);
-    color: rgb(var(--text));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+  .card-bottom p {
+    margin: 0 0 0.7rem;
+    font-size: 0.82rem;
+    line-height: 1.5;
   }
 
-  .edu-meta {
-    margin: 0 0 1.25rem 0;
-    color: rgb(var(--primary));
-    font-weight: 600;
-    font-size: 0.95rem;
+  .card-bottom p:last-child {
+    margin-bottom: 0;
+    color: rgb(var(--text-muted));
   }
 
-  .edu-card.featured .edu-meta {
-    font-size: 1.02rem;
+  .card-bottom span {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    text-transform: uppercase;
   }
 
-  .edu-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    color: rgb(var(--text));
-    font-size: 0.95rem;
-    line-height: 1.6;
+  @media (max-width: 900px) {
+    .education-grid { grid-template-columns: 1fr; }
+    .education-card { min-height: 310px; }
   }
 
-  .edu-card.featured .edu-list {
-    font-size: 1rem;
-    gap: 0.9rem;
-  }
-
-  .edu-list li {
-    position: relative;
-    padding-left: 1.25rem;
-  }
-
-  .edu-list li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: rgb(var(--primary));
-    font-weight: 700;
-  }
-
-  .edu-accent {
-    position: absolute;
-    inset: auto -120px -140px auto;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(var(--accent), 0.22), rgba(var(--accent), 0));
-    filter: blur(40px);
-    opacity: 0.35;
-    pointer-events: none;
-  }
-
-  @media (max-width: 768px) {
-    .education-section {
-      margin: 4rem auto;
-      padding: 0 1rem;
-    }
-
-    .section-title {
-      font-size: 2rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
-    }
-
-    .education-bento {
-      grid-template-columns: 1fr;
-    }
-
-    .edu-card.featured {
-      grid-row: auto;
-      min-height: auto;
-    }
-
-    .edu-card {
-      min-height: auto;
-      padding: 1.5rem;
-    }
-
-    .edu-card.featured {
-      padding: 1.75rem;
-    }
+  @media (max-width: 620px) {
+    .education-section { padding-inline: 1rem; }
+    .section-heading { grid-template-columns: 1fr; }
   }
 </style>
