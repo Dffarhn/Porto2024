@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# Daffa Porto
 
 ```sh
 npm create astro@latest -- --template basics
