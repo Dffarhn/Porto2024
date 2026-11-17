@@ -1,47 +1,29 @@
 User-agent: *
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 # AI and answer-engine crawlers are welcome to read the public portfolio.
 User-agent: GPTBot
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: ChatGPT-User
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: OAI-SearchBot
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: ClaudeBot
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: Claude-User
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: Claude-SearchBot
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: PerplexityBot
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 User-agent: Google-Extended
 Allow: /
-Disallow: /auth/
-Disallow: /tasks/
 
 Sitemap: https://daffaraihan.vercel.app/sitemap-index.xml

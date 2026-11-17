@@ -2,6 +2,9 @@
   "name": "tasksapp",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -14,7 +17,6 @@
     "@astrojs/react": "^3.6.2",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.8.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.0",

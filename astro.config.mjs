@@ -3,25 +3,19 @@ import react from '@astrojs/react';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 
-import vercel from "@astrojs/vercel/serverless";
-import { projects } from "./src/data/projects.ts";
-
 const site = "https://daffaraihan.vercel.app";
 
+// Fully static site: every page (including /projects/[slug]) is generated at build time,
+// so it needs no server adapter or serverless runtime.
 // https://astro.build/config
 export default defineConfig({
   site,
-  output: "server",
   integrations: [
     react({
       experimentalReactChildren: true
     }),
     tailwind(),
     sitemap({
-      // Private/app pages stay out of the sitemap (they are also noindex + disallowed in robots.txt).
-      filter: (page) => !/\/(auth|tasks)(\/|$)/.test(page),
-      // /projects/[slug] is a dynamic route, so Astro cannot discover the URLs on its own.
-      customPages: projects.map((project) => `${site}/projects/${project.slug}`),
       // Match the canonical URLs, which have no trailing slash (except the homepage).
       serialize: (item) => {
         const url = new URL(item.url);
@@ -30,5 +24,4 @@ export default defineConfig({
       },
     }),
   ],
-  adapter: vercel({ imageService: true })
 });

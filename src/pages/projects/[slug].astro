@@ -1,15 +1,15 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/LandingPage/Navbar.astro";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { projects } from "@/data/projects";
 import type { Project } from "@/data/projects";
 
-const { slug } = Astro.params;
-const project = getProjectBySlug(slug ?? "");
-
-if (!project) {
-  return Astro.redirect("/#projects");
+// The site is fully static: one page per project is generated at build time.
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
+
+const { project } = Astro.props;
 
 const navLinks = [
   { href: "/", text: "Home" },
