@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import portrait from "../../assets/me.png";
+
 const socialLinks = [
   { href: "https://github.com/Dffarhn", label: "GitHub" },
   { href: "https://linkedin.com/in/dapdap", label: "LinkedIn" },
@@ -8,7 +11,7 @@ const socialLinks = [
 
 <section class="hero">
   <div class="hero-shell">
-    <div class="hero-topline">
+    <div class="hero-topline" data-reveal="fade">
       <p>Daffa Raihan / Full-stack engineer</p>
       <p class="availability"><span></span> Available for selected work</p>
       <p>Yogyakarta · ID</p>
@@ -16,28 +19,43 @@ const socialLinks = [
 
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="hero-index">Portfolio / 2026</p>
-        <h1 class="hero-title">
+        <p class="hero-index" data-reveal style="--i:1">Portfolio / 2026</p>
+        <h1 class="hero-title" data-split style="--sd:150ms">
           Systems that<br />
           <span>ship.</span> Products<br />
           that matter.
         </h1>
         <div class="hero-bottom">
-          <p class="hero-lead">
+          <p class="hero-lead" data-reveal style="--i:6">
             I design and build production software—from backend architecture and automation to AI products used by real people.
           </p>
-          <div class="hero-actions">
+          <div class="hero-actions" data-reveal style="--i:7">
             <a href="#projects" class="btn btn-solid">Explore selected work <span>↘</span></a>
             <a href="/project/CV.pdf" download class="btn btn-ghost">Download CV</a>
           </div>
         </div>
       </div>
 
-      <aside class="hero-visual">
-        <div class="portrait-wrap">
-          <span class="portrait-label">Engineer / Builder / Researcher</span>
-          <img class="profile-image" src="/me.png" alt="Muhammad Daffa Raihan" width="819" height="819" />
-          <span class="portrait-mark">DR.</span>
+      <aside class="hero-visual" data-reveal="scale" style="--i:3">
+        <div class="portrait-motion" data-parallax-scroll="0.1">
+          <div class="portrait-tilt" data-tilt>
+            <div class="portrait-wrap">
+              <span class="portrait-label">Engineer / Builder / Researcher</span>
+              <Image
+                class="profile-image"
+                src={portrait}
+                alt="Muhammad Daffa Raihan"
+                widths={[360, 540, 720]}
+                sizes="(max-width: 620px) 300px, (max-width: 900px) 330px, 440px"
+                format="webp"
+                quality={80}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+              <span class="portrait-mark">DR.</span>
+            </div>
+          </div>
         </div>
         <div class="visual-note">
           <span>Current focus</span>
@@ -52,7 +70,7 @@ const socialLinks = [
           <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>
         ))}
       </div>
-      <p>Scroll to discover <span>↓</span></p>
+      <p>Scroll to discover <span class="nudge">↓</span></p>
     </div>
   </div>
 </section>
@@ -246,6 +264,35 @@ const socialLinks = [
 
   .portrait-wrap:hover {
     transform: rotate(0deg);
+  }
+
+  .portrait-tilt {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 400ms var(--ease-out);
+  }
+
+  .nudge {
+    display: inline-block;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .availability span {
+      animation: pulse 2.4s ease-out infinite;
+    }
+
+    .nudge {
+      animation: nudge 1.8s var(--ease-out) infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(49, 87, 255, 0.35); }
+      70%, 100% { box-shadow: 0 0 0 9px rgba(49, 87, 255, 0); }
+    }
+
+    @keyframes nudge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
   }
 
   .portrait-label {

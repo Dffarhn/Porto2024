@@ -8,7 +8,7 @@ import AboutPage from "@/components/LandingPage/AboutPage.astro";
 import Achievements from "@/components/LandingPage/Achievements.astro";
 import WorkExperience from "@/components/LandingPage/WorkExperience.astro";
 import Education from "@/components/LandingPage/Education.astro";
-import MotionSection from "@/components/LandingPage/MotionSection";
+import { featuredProjects } from "@/data/projects";
 
 const navLinks = [
   { href: "#projects", text: "Work" },
@@ -16,25 +16,36 @@ const navLinks = [
   { href: "#work-experience", text: "Experience" },
   { href: "#contact", text: "Contact" },
 ];
+
+const siteURL = (Astro.site ?? new URL(Astro.url.origin)).href.replace(/\/$/, "");
+const jsonLdExtra = [
+  {
+    "@type": "ItemList",
+    name: "Selected projects",
+    itemListElement: featuredProjects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${siteURL}/projects/${project.slug}`,
+      name: project.title,
+    })),
+  },
+];
 ---
 
 <Layout
-  title="Daffa Raihan  Full‑stack Developer (UII) | Portfolio"
-  description="Daffa Raihan is a full‑stack developer at UII building scalable web and backend systems with NestJS, Golang, Next.js, and PostgreSQLplus AI features used in production. Explore projects, experience, awards, and education."
-  keywords="daffa raihan, daffaraihan, daffa raihan portfolio, daffa raihan uii, universitas islam indonesia, uii informatics, full stack developer, full stack engineer, software engineer, backend engineer, nestjs developer, golang developer, next.js developer, postgresql, ci/cd, system design, indes 2025, automata 2025, explainable ai, xai"
+  jsonLdExtra={jsonLdExtra}
+  title="Daffa Raihan | Full-stack Developer (UII) Portfolio"
+  description="Daffa Raihan is a full-stack developer at UII building production web, mobile, and backend systems with Golang, NestJS, Next.js, Laravel, and Flutter, plus applied AI with Claude and Hermes. Explore projects, experience, awards, and education."
+  keywords="daffa raihan, daffaraihan, daffa raihan portfolio, daffa raihan uii, universitas islam indonesia, uii informatics, full stack developer, full stack engineer, software engineer, backend engineer, nestjs developer, golang developer, next.js developer, laravel developer, php developer, flutter developer, postgresql, mysql, ci/cd, ai agents, claude, hermes agent, system design, indes 2025, automata 2025, explainable ai, xai"
 >
   <Navbar navigasi={navLinks} />
 
   <section id="greeting">
-    <MotionSection client:load variant="hero" className="w-full">
-      <Greeting />
-    </MotionSection>
+    <Greeting />
   </section>
   
   <section id="about">
-    <MotionSection client:visible className="w-full">
-      <AboutPage />
-    </MotionSection>
+    <AboutPage />
   </section>
 
   <section class="overflow-hidden" id="projects">
@@ -43,35 +54,26 @@ const navLinks = [
   </section>
   
   <section id="work-experience">
-    <MotionSection client:visible className="w-full">
-      <WorkExperience />
-    </MotionSection>
+    <WorkExperience />
   </section>
   
   <section id="achievements">
-    <MotionSection client:visible className="w-full">
-      <Achievements />
-    </MotionSection>
+    <Achievements />
   </section>
   
   <section id="education">
-    <MotionSection client:visible className="w-full">
-      <Education />
-    </MotionSection>
+    <Education />
   </section>
   
   <section id="contact">
-    <MotionSection client:visible className="w-full">
-      <FormLP />
-    </MotionSection>
+    <FormLP />
   </section>
 
 
   <a
     id="scrollToTop"
-    href="#"
-    class="fixed bottom-5 right-5 z-[9999] pointer-events-auto bg-[#161713] text-white p-3 rounded-full border border-black/10 hover:bg-[#3157ff] focus:outline-none focus:ring-2 focus:ring-[#3157ff]/30 transition-colors duration-200 hidden isolate"
-    onclick="scrollToTop(); return false;"
+    href="#greeting"
+    class="fixed bottom-5 right-5 z-[9999] bg-[#161713] text-white p-3 rounded-full border border-black/10 hover:bg-[#3157ff] focus:outline-none focus:ring-2 focus:ring-[#3157ff]/30 transition-all duration-300 isolate opacity-0 translate-y-3 pointer-events-none"
     aria-label="Scroll to top"
   >
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6 mx-auto">
@@ -81,23 +83,22 @@ const navLinks = [
 </Layout>
 
 <script>
-  // Show or hide the scroll-to-top button based on scroll position
-  window.onscroll = function () {
-    const scrollTopButton:any = document.getElementById("scrollToTop");
-    if (document.documentElement.scrollTop > 300 || document.body.scrollTop > 300) {
-      scrollTopButton.classList.remove("hidden");
-      scrollTopButton.classList.add("visible");
-    } else {
-      scrollTopButton.classList.remove("visible");
-      scrollTopButton.classList.add("hidden");
-    }
-  };
+  const scrollTopButton = document.getElementById("scrollToTop");
+
+  // Fade the scroll-to-top button in and out based on scroll position
+  function syncScrollTopButton() {
+    if (!scrollTopButton) return;
+    const show = window.scrollY > 300;
+    scrollTopButton.classList.toggle("opacity-0", !show);
+    scrollTopButton.classList.toggle("translate-y-3", !show);
+    scrollTopButton.classList.toggle("pointer-events-none", !show);
+  }
+  window.addEventListener("scroll", syncScrollTopButton, { passive: true });
+  syncScrollTopButton();
 
   // Scroll to the top of the page when the button is clicked
-  function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }
+  scrollTopButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 </script>

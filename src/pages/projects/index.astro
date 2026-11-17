@@ -1,0 +1,236 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/LandingPage/Navbar.astro";
+import { featuredProjects, seriesProjects, allTags } from "@/data/projects";
+
+const projects = [...featuredProjects, ...seriesProjects];
+
+const navLinks = [
+  { href: "/", text: "Home" },
+  { href: "/#projects", text: "Projects" },
+  { href: "/#work-experience", text: "Work Experience" },
+  { href: "/#contact", text: "Contact" },
+];
+
+const rows = projects.map((project) => ({
+  ...project,
+  tagList: project.category === "series" ? ["Web"] : (project.tags ?? []),
+  stack: project.techStack.slice(0, 3).join(" · "),
+}));
+
+const siteURL = (Astro.site ?? new URL(Astro.url.origin)).href.replace(/\/$/, "");
+const jsonLdExtra = [
+  {
+    "@type": "CollectionPage",
+    "@id": `${siteURL}/projects#collection`,
+    name: "All projects",
+    url: `${siteURL}/projects`,
+    isPartOf: { "@id": `${siteURL}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: projects.map((project, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${siteURL}/projects/${project.slug}`,
+        name: project.title,
+      })),
+    },
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteURL}/` },
+      { "@type": "ListItem", position: 2, name: "Projects", item: `${siteURL}/projects` },
+    ],
+  },
+];
+---
+
+<Layout
+  jsonLdExtra={jsonLdExtra}
+  title="All projects | Daffa Raihan"
+  description="Complete list of projects by Daffa Raihan: platforms, AI systems, mobile apps, and design experiments."
+  keywords="daffa raihan, projects, portfolio, full stack developer"
+>
+  <Navbar navigasi={navLinks} />
+
+  <main class="archive">
+    <div class="archive-inner">
+      <a class="back-link" href="/#projects">Back to home</a>
+      <h1>All projects <span>({rows.length})</span></h1>
+
+      <div class="chips" role="group" aria-label="Filter projects">
+        <button type="button" class="chip is-active" data-filter="all">All</button>
+        {allTags.map((tag) => <button type="button" class="chip" data-filter={tag}>{tag}</button>)}
+      </div>
+
+      <ul class="rows">
+        {rows.map((project, index) => (
+          <li data-tags={project.tagList.join(",")}>
+            <a class="row" href={`/projects/${project.slug}`} style={`--project-accent: rgb(${project.accent})`}>
+              <span class="num">{String(index + 1).padStart(2, "0")}</span>
+              <span class="name">{project.title}</span>
+              <span class="sub">{project.subtitle}</span>
+              <span class="stack">{project.stack}</span>
+              <span class="arrow">↗</span>
+              {project.img && <img class="peek" src={project.img} alt="" loading="lazy" />}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .archive {
+    min-height: 100vh;
+    padding: 7rem 0 5rem;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .archive-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  h1 {
+    margin: 1.5rem 0;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    line-height: 1;
+  }
+
+  h1 span {
+    color: rgb(var(--text-muted));
+    font-size: 0.4em;
+    letter-spacing: 0;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .chip {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(var(--text), 0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .chip:hover,
+  .chip.is-active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .rows {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--ink);
+  }
+
+  .rows li[hidden] {
+    display: none;
+  }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.5rem 1.4fr 1.4fr 1.2fr 1.5rem;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(var(--text), 0.25);
+    color: var(--ink);
+    transition: padding 200ms ease, color 200ms ease;
+  }
+
+  .row:hover {
+    padding-left: 0.75rem;
+    color: var(--signal);
+  }
+
+  .num,
+  .sub,
+  .stack {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .name {
+    font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+    letter-spacing: -0.04em;
+  }
+
+  .arrow {
+    text-align: right;
+  }
+
+  .peek {
+    position: absolute;
+    right: 3rem;
+    top: 50%;
+    z-index: 5;
+    width: 220px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--ink);
+    background: var(--project-accent);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) scale(0.96);
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+
+  @media (hover: hover) {
+    .row:hover .peek {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .archive-inner { padding: 0 1rem; }
+    .row { grid-template-columns: 2rem 1fr 1.5rem; row-gap: 0.25rem; }
+    .sub, .stack { grid-column: 2; }
+    .arrow { grid-column: 3; grid-row: 1; }
+  }
+</style>
+
+<script>
+  const chips = Array.from(document.querySelectorAll<HTMLButtonElement>(".chip"));
+  const items = Array.from(document.querySelectorAll<HTMLElement>(".rows li"));
+
+  chips.forEach((chip) =>
+    chip.addEventListener("click", () => {
+      const filter = chip.dataset.filter ?? "all";
+      chips.forEach((c) => c.classList.toggle("is-active", c === chip));
+      items.forEach((li) => {
+        li.hidden = filter !== "all" && !(li.dataset.tags ?? "").split(",").includes(filter);
+      });
+    }),
+  );
+</script>

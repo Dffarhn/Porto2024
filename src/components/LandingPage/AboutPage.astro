@@ -6,43 +6,108 @@ const stats = [
   { value: "2", label: "awards earned" },
 ];
 
-const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "OpenAI", "CI/CD"];
+const roles = [
+  { key: "researcher", title: "Researcher", note: "Explainable AI · UII Informatics", y: 18 },
+  { key: "fullstack", title: "Full Stack Engineer", note: "Web · Mobile · Backend", y: 50 },
+  { key: "ai", title: "AI Engineer", note: "Applied AI · Agents", y: 82 },
+];
+
+const stackGroups = [
+  { label: "Backend", items: ["Golang", "NestJS", "PHP", "Laravel"] },
+  { label: "Web & Mobile", items: ["Next.js", "Flutter"] },
+  { label: "Data", items: ["PostgreSQL", "MySQL", "Redis"] },
+  { label: "AI", items: ["OpenAI", "Claude", "Hermes"] },
+  { label: "Infra", items: ["Docker", "CI/CD"] },
+];
 ---
 
 <div class="profile-section">
   <div class="profile-inner">
     <header class="section-heading">
-      <p class="section-index">01 / Profile</p>
-      <h2>I work where complex systems meet <em>clear experiences.</em></h2>
+      <p class="section-index" data-reveal="fade">01 / Profile</p>
+      <h2 data-split>I work where complex systems meet <em>clear experiences.</em></h2>
     </header>
 
     <div class="profile-grid">
+      <div class="profile-top">
       <div class="profile-statement">
-        <p class="lead">
+        <p class="lead" data-reveal>
           I’m an informatics researcher and full-stack engineer building end-to-end products:
           backend services, web platforms, mobile systems, and applied AI.
         </p>
-        <p>
+        <p data-reveal style="--i:1">
           My work goes beyond getting a feature to run. I care about the architecture behind it,
           the deployment path around it, and whether it creates measurable value after launch.
         </p>
       </div>
 
+      <figure class="route" data-reveal="fade" style="--i:2">
+        <figcaption>One path · three roles</figcaption>
+        <div class="route-canvas">
+          <svg viewBox="0 0 400 300" aria-hidden="true" focusable="false">
+            <g class="route-lines" fill="none" stroke-linecap="round">
+              <path class="line line-trunk" pathLength="1" d="M14 150 H80" />
+              <path class="line line-researcher" pathLength="1" d="M80 150 C130 150 130 54 176 54 H216" />
+              <path class="line line-fullstack" pathLength="1" d="M80 150 H216" />
+              <path class="line line-ai" pathLength="1" d="M80 150 C130 150 130 246 176 246 H216" />
+            </g>
+            <circle class="node node-start" cx="14" cy="150" r="7" />
+            <circle class="node node-end node-researcher" cx="216" cy="54" r="6" />
+            <circle class="node node-end node-fullstack" cx="216" cy="150" r="6" />
+            <circle class="node node-end node-ai" cx="216" cy="246" r="6" />
+
+            <g class="dots">
+              <circle r="3.5">
+                <animateMotion dur="4.2s" begin="2s" repeatCount="indefinite" keyTimes="0;0.6;1" keyPoints="0;1;1" calcMode="linear" path="M14 150 H80 C130 150 130 54 176 54 H216" />
+                <animate attributeName="opacity" dur="4.2s" begin="2s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.55;0.62;1" />
+              </circle>
+              <circle r="3.5">
+                <animateMotion dur="4.2s" begin="2.7s" repeatCount="indefinite" keyTimes="0;0.6;1" keyPoints="0;1;1" calcMode="linear" path="M14 150 H216" />
+                <animate attributeName="opacity" dur="4.2s" begin="2.7s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.55;0.62;1" />
+              </circle>
+              <circle r="3.5">
+                <animateMotion dur="4.2s" begin="3.4s" repeatCount="indefinite" keyTimes="0;0.6;1" keyPoints="0;1;1" calcMode="linear" path="M14 150 H80 C130 150 130 246 176 246 H216" />
+                <animate attributeName="opacity" dur="4.2s" begin="3.4s" repeatCount="indefinite" values="0;1;1;0;0" keyTimes="0;0.05;0.55;0.62;1" />
+              </circle>
+            </g>
+          </svg>
+
+          <ul class="route-labels">
+            {roles.map((role, index) => (
+              <li class={`route-label label-${role.key}`} style={`top:${role.y}%; --i:${index}`}>
+                <strong>{role.title}</strong>
+                <span>{role.note}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </figure>
+      </div>
+
       <div class="stats-grid" aria-label="Career highlights">
-        {stats.map((stat) => (
-          <article class="stat">
-            <strong>{stat.value}</strong>
+        {stats.map((stat, index) => (
+          <article class="stat" data-reveal style={`--i:${index}`}>
+            <strong data-count>{stat.value}</strong>
             <span>{stat.label}</span>
           </article>
         ))}
       </div>
     </div>
 
-    <div class="stack-row">
+    <div class="stack-row" data-reveal="fade">
       <p>Core toolkit</p>
-      <ul>
-        {stack.map((item) => <li>{item}</li>)}
-      </ul>
+      <dl class="stack-groups">
+        {stackGroups.map((group, index) => (
+          <div class="stack-group" data-reveal style={`--i:${index}`}>
+            <dt>{group.label}</dt>
+            <dd>
+              <ul>
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </div>
 </div>
@@ -97,12 +162,18 @@ const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "
     padding: clamp(3rem, 7vw, 6rem) 0;
   }
 
-  .profile-statement {
-    max-width: 52rem;
+  .profile-top {
     display: grid;
-    grid-template-columns: minmax(280px, 1.2fr) minmax(240px, 0.8fr);
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
     gap: clamp(2rem, 6vw, 6rem);
-    align-items: end;
+    align-items: center;
+  }
+
+  .profile-statement {
+    max-width: 36rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .profile-statement p {
@@ -118,6 +189,159 @@ const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "
     font-size: clamp(1.25rem, 2vw, 1.75rem);
     line-height: 1.35;
     letter-spacing: -0.025em;
+  }
+
+  /* ---------- Route diagram: one path, three roles ---------- */
+  .route {
+    margin: 0;
+    width: 100%;
+    max-width: 34rem;
+    justify-self: end;
+  }
+
+  .route figcaption {
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+
+  .route-canvas {
+    position: relative;
+    aspect-ratio: 400 / 300;
+  }
+
+  .route-canvas svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .route .line {
+    stroke: rgba(242, 240, 232, 0.4);
+    stroke-width: 1.5;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    vector-effect: non-scaling-stroke;
+    transition: stroke 250ms ease, stroke-width 250ms ease;
+  }
+
+  .route .node {
+    fill: var(--dark-surface);
+    stroke: rgba(242, 240, 232, 0.6);
+    stroke-width: 1.5;
+    transition: fill 250ms ease, stroke 250ms ease;
+  }
+
+  .route .node-start {
+    fill: var(--acid);
+    stroke: var(--acid);
+  }
+
+  .route .dots circle {
+    fill: var(--acid);
+  }
+
+  .route-labels {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .route-label {
+    position: absolute;
+    left: 58%;
+    right: 0;
+    transform: translateY(-50%);
+    display: grid;
+    gap: 0.2rem;
+    cursor: default;
+  }
+
+  .route-label strong {
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--on-dark);
+    transition: color 250ms ease;
+  }
+
+  .route-label span {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--on-dark-muted);
+  }
+
+  /* Hover a role: its branch lights up */
+  .route:has(.label-researcher:hover) .line-researcher,
+  .route:has(.label-fullstack:hover) .line-fullstack,
+  .route:has(.label-ai:hover) .line-ai {
+    stroke: var(--acid);
+    stroke-width: 2.5;
+  }
+
+  .route:has(.label-researcher:hover) .node-researcher,
+  .route:has(.label-fullstack:hover) .node-fullstack,
+  .route:has(.label-ai:hover) .node-ai {
+    fill: var(--acid);
+    stroke: var(--acid);
+  }
+
+  .route-label:hover strong {
+    color: var(--acid);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Branches draw themselves, then the labels arrive; dots keep travelling afterwards. */
+    .js .route:not(.is-in) .line { stroke-dashoffset: 1; }
+    .js .route:not(.is-in) .node-end { opacity: 0; }
+    .js .route:not(.is-in) .route-label { opacity: 0; }
+    .js .route:not(.is-in) .dots { opacity: 0; }
+
+    .js .route.is-in .line {
+      animation: route-draw 900ms var(--ease-out) backwards;
+    }
+    .js .route.is-in .line-trunk { animation-delay: 150ms; animation-duration: 500ms; }
+    .js .route.is-in .line-researcher { animation-delay: 600ms; }
+    .js .route.is-in .line-fullstack { animation-delay: 750ms; }
+    .js .route.is-in .line-ai { animation-delay: 900ms; }
+
+    .js .route.is-in .route-label {
+      animation: route-label 700ms var(--ease-out) backwards;
+      animation-delay: calc(1300ms + var(--i, 0) * 120ms);
+    }
+
+    .js .route.is-in .node-end {
+      animation: route-pop 500ms var(--ease-out) backwards;
+      animation-delay: calc(1300ms + var(--i, 0) * 120ms);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .js .route.is-in .node-researcher { --i: 0; }
+    .js .route.is-in .node-fullstack { --i: 1; }
+    .js .route.is-in .node-ai { --i: 2; }
+
+    .js .route.is-in .dots { animation: m-fade 600ms ease 1800ms backwards; }
+
+    @keyframes route-draw { from { stroke-dashoffset: 1; } }
+    @keyframes route-pop { from { opacity: 0; transform: scale(0.2); } }
+    @keyframes route-label {
+      from { opacity: 0; transform: translate(-12px, -50%); }
+    }
+  }
+
+
+  @media (prefers-reduced-motion: reduce) {
+    .route .dots { display: none; }
   }
 
   .stats-grid {
@@ -182,6 +406,40 @@ const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "
     color: var(--on-dark-muted);
   }
 
+  .stack-groups {
+    margin: 0;
+  }
+
+  .stack-group {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.3fr) 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(242, 240, 232, 0.14);
+  }
+
+  .stack-group:first-child {
+    padding-top: 0;
+  }
+
+  .stack-group:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .stack-group dt {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--on-dark-muted);
+  }
+
+  .stack-group dd {
+    margin: 0;
+  }
+
   .stack-row ul {
     display: flex;
     flex-wrap: wrap;
@@ -203,8 +461,11 @@ const stack = ["Golang", "NestJS", "Next.js", "PostgreSQL", "Redis", "Docker", "
   @media (max-width: 760px) {
     .profile-section { padding-inline: 1rem; }
     .section-heading,
+    .profile-top,
     .profile-statement,
     .stack-row { grid-template-columns: 1fr; }
+    .route { justify-self: start; max-width: none; }
+    .stack-group { grid-template-columns: 1fr; gap: 0.6rem; }
     .profile-grid { gap: 3rem; }
     .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .stat {

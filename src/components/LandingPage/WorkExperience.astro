@@ -41,14 +41,14 @@ const experiences = [
 <div class="experience-section">
   <div class="experience-inner">
     <header class="section-heading">
-      <p class="section-index">04 / Experience</p>
-      <h2>From the lab to <em>production.</em></h2>
-      <p>A track record across product teams, research, education, and systems serving real users.</p>
+      <p class="section-index" data-reveal="fade">04 / Experience</p>
+      <h2 data-split>From the lab to <em>production.</em></h2>
+      <p data-reveal style="--i:3">A track record across product teams, research, education, and systems serving real users.</p>
     </header>
 
     <div class="experience-list">
       {experiences.map((item, index) => (
-        <details class="experience-row" open={index === 0}>
+        <details class="experience-row" open={index === 0} data-reveal style={`--i:${index}`}>
           <summary>
             <span class="row-number">0{index + 1}</span>
             <span class="company">{item.company}</span>

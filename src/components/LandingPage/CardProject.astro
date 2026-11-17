@@ -1,5 +1,7 @@
 ---
-import { featuredProjects, seriesProjects } from "@/data/projects";
+import { spotlightProjects, moreProjects, allTags, seriesProjects } from "@/data/projects";
+
+const INITIAL_VISIBLE = 6;
 
 const series = seriesProjects[0];
 const coffeeSites = series?.coffeeSites ?? [];
@@ -9,19 +11,19 @@ const previewSites = coffeeSites.slice(0, 3);
 <div class="work-section">
   <div class="work-inner">
     <header class="work-heading">
-      <p class="section-index">02 / Selected work</p>
+      <p class="section-index" data-reveal="fade">02 / Selected work</p>
       <div>
-        <h2>Built for the <em>real world.</em></h2>
-        <p>Production platforms, automation systems, and applied AI with measurable outcomes.</p>
+        <h2 data-split>Built for the <em>real world.</em></h2>
+        <p data-reveal style="--i:3">Production platforms, automation systems, and applied AI with measurable outcomes.</p>
       </div>
     </header>
 
     <div class="project-list">
-      {featuredProjects.map((project, index) => (
+      {spotlightProjects.map((project, index) => (
         <article class="project" style={`--project-accent: rgb(${project.accent})`}>
-          <a class="project-media" href={`/projects/${project.slug}`} aria-label={`Read ${project.title} case study`}>
+          <a class="project-media" data-wipe={index % 2 === 1 ? "right" : ""} data-follow href={`/projects/${project.slug}`} aria-label={`Read ${project.title} case study`}>
             {project.img ? (
-              <img src={project.img} alt={`Preview of ${project.title}`} loading={index > 1 ? "lazy" : "eager"} />
+              <img data-parallax-img="0.07" src={project.img} alt={`Preview of ${project.title}`} loading="lazy" decoding="async" />
             ) : (
               <div class="project-placeholder">{project.initials}</div>
             )}
@@ -29,16 +31,16 @@ const previewSites = coffeeSites.slice(0, 3);
           </a>
 
           <div class="project-copy">
-            <div class="project-meta">
+            <div class="project-meta" data-reveal="fade">
               <span>0{index + 1}</span>
               <span>{project.client ?? project.role}</span>
             </div>
-            <h3><a href={`/projects/${project.slug}`}>{project.title}</a></h3>
-            <p class="project-subtitle">{project.subtitle}</p>
-            <p class="project-description">{project.shortDescription}</p>
-            {project.impact && <p class="project-impact">{project.impact}</p>}
+            <h3 data-reveal style="--i:1"><a href={`/projects/${project.slug}`}>{project.title}</a></h3>
+            <p class="project-subtitle" data-reveal style="--i:2">{project.subtitle}</p>
+            <p class="project-description" data-reveal style="--i:3">{project.shortDescription}</p>
+            {project.impact && <p class="project-impact" data-reveal style="--i:4">{project.impact}</p>}
             {project.techStack.length > 0 && (
-              <ul class="project-stack">
+              <ul class="project-stack" data-reveal style="--i:5">
                 {project.techStack.slice(0, 4).map((item) => <li>{item}</li>)}
               </ul>
             )}
@@ -46,30 +48,67 @@ const previewSites = coffeeSites.slice(0, 3);
         </article>
       ))}
     </div>
+
+    {moreProjects.length > 0 && (
+      <div class="more-work" data-more-work data-initial={INITIAL_VISIBLE}>
+        <div class="more-head" data-reveal>
+          <h3>More work</h3>
+          <div class="chips" role="group" aria-label="Filter projects">
+            <button type="button" class="chip is-active" data-filter="all">All</button>
+            {allTags.map((tag) => <button type="button" class="chip" data-filter={tag}>{tag}</button>)}
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          {moreProjects.map((project, index) => (
+            <a class="mini" data-reveal style={`--i:${index % 3}; --project-accent: rgb(${project.accent})`} href={`/projects/${project.slug}`} data-tags={(project.tags ?? []).join(",")}>
+              <div class="mini-media">
+                {project.img ? <img src={project.img} alt={`Preview of ${project.title}`} loading="lazy" decoding="async" /> : <span>{project.initials}</span>}
+              </div>
+              <div class="mini-body">
+                <h4>{project.title}</h4>
+                <p class="mini-sub">{project.subtitle}</p>
+                <p class="mini-desc">{project.shortDescription}</p>
+                {project.techStack.length > 0 && (
+                  <ul class="project-stack">
+                    {project.techStack.slice(0, 3).map((item) => <li>{item}</li>)}
+                  </ul>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="more-actions" data-reveal="fade">
+          <button type="button" class="more-btn" data-show-more hidden>Show more</button>
+          <a class="all-link" href="/projects">All projects <span>↗</span></a>
+        </div>
+      </div>
+    )}
   </div>
 
   {series && (
     <div class="coffee-section" id="one-coffee-one-web">
       <div class="coffee-inner">
         <header class="coffee-heading">
-          <p class="section-index">03 / Creative playground</p>
+          <p class="section-index" data-reveal="fade">03 / Creative playground</p>
           <div>
-            <p class="coffee-count">{coffeeSites.length} places · {coffeeSites.length} visual languages</p>
-            <h2>One coffee.<br /><em>One website.</em></h2>
+            <p class="coffee-count" data-reveal style="--i:1">{coffeeSites.length} places · {coffeeSites.length} visual languages</p>
+            <h2 data-split style="--sd:100ms">One coffee.<br /><em>One website.</em></h2>
           </div>
-          <p class="coffee-copy">{series.shortDescription}</p>
+          <p class="coffee-copy" data-reveal style="--i:4">{series.shortDescription}</p>
         </header>
 
         <a class="coffee-gallery" href={`/projects/${series.slug}`} aria-label="Explore the One Coffee One Web series">
           {previewSites.map((site, index) => (
-            <figure class={`coffee-tile tile-${index + 1}`}>
-              {site.img && <img src={site.img} alt={`Website design for ${site.name}`} loading="lazy" />}
+            <figure class={`coffee-tile tile-${index + 1}`} data-reveal style={`--i:${index}`} data-parallax={["0.02", "0.12", "0.06"][index]}>
+              {site.img && <img src={site.img} alt={`Website design for ${site.name}`} loading="lazy" decoding="async" />}
               <figcaption><span>{site.number}</span>{site.name}</figcaption>
             </figure>
           ))}
         </a>
 
-        <a class="series-link" href={`/projects/${series.slug}`}>Explore the complete series <span>↗</span></a>
+        <a class="series-link" data-reveal="fade" href={`/projects/${series.slug}`}>Explore the complete series <span>↗</span></a>
       </div>
     </div>
   )}
@@ -136,9 +175,9 @@ const previewSites = coffeeSites.slice(0, 3);
 
   .project {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
-    gap: clamp(2rem, 6vw, 6rem);
-    padding: clamp(3rem, 7vw, 6rem) 0;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(2rem, 4vw, 3.5rem) 0;
     border-bottom: 1px solid var(--ink);
     align-items: center;
   }
@@ -197,8 +236,9 @@ const previewSites = coffeeSites.slice(0, 3);
     font-size: 0.65rem;
     text-transform: uppercase;
     transform: translateY(8px);
+    translate: var(--mx, 0px) var(--my, 0px);
     opacity: 0;
-    transition: opacity 200ms ease, transform 200ms ease;
+    transition: opacity 200ms ease, transform 200ms ease, translate 300ms var(--ease-out);
   }
 
   .project-media:hover .open-mark {
@@ -219,8 +259,8 @@ const previewSites = coffeeSites.slice(0, 3);
   }
 
   .project-copy h3 {
-    margin: 1.5rem 0 0.25rem;
-    font-size: clamp(2.4rem, 5vw, 5rem);
+    margin: 1rem 0 0.25rem;
+    font-size: clamp(2rem, 3.6vw, 3.4rem);
     font-weight: 500;
     letter-spacing: -0.065em;
   }
@@ -234,7 +274,7 @@ const previewSites = coffeeSites.slice(0, 3);
   }
 
   .project-subtitle {
-    margin: 0 0 2rem;
+    margin: 0 0 1.25rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -243,7 +283,7 @@ const previewSites = coffeeSites.slice(0, 3);
 
   .project-description {
     margin: 0 0 1.25rem;
-    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
     line-height: 1.55;
   }
 
@@ -271,6 +311,175 @@ const previewSites = coffeeSites.slice(0, 3);
     border-radius: 999px;
     font-family: var(--font-mono);
     font-size: 0.62rem;
+  }
+
+  .more-work {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .more-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .more-head h3 {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(var(--text), 0.35);
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .chip:hover,
+  .chip.is-active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .mini {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(var(--text), 0.25);
+    color: inherit;
+    transition: transform 200ms ease, border-color 200ms ease;
+  }
+
+  .mini[hidden] {
+    display: none;
+  }
+
+  .mini:hover {
+    transform: translateY(-4px);
+    border-color: var(--ink);
+  }
+
+  .mini-media {
+    background: var(--project-accent);
+    color: white;
+    overflow: hidden;
+  }
+
+  .mini-media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .mini-media span {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  .mini-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    flex: 1;
+  }
+
+  .mini-body h4 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+
+  .mini-sub {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    color: rgb(var(--text-muted));
+  }
+
+  .mini-desc {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .mini-body .project-stack {
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .more-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--ink);
+  }
+
+  .more-btn {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .more-btn[hidden] {
+    display: none;
+  }
+
+  .more-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .all-link {
+    margin-left: auto;
+    color: var(--ink);
+    font-size: 1.1rem;
+  }
+
+  .all-link:hover {
+    color: var(--signal);
   }
 
   .coffee-section {
@@ -331,10 +540,9 @@ const previewSites = coffeeSites.slice(0, 3);
 
   .coffee-tile img {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    height: auto;
     display: block;
-    object-fit: cover;
-    object-position: top;
+    object-fit: contain;
     border: 1px solid rgba(22, 23, 19, 0.25);
     filter: saturate(0.82);
     transition: filter 200ms ease, transform 250ms ease;
@@ -342,7 +550,7 @@ const previewSites = coffeeSites.slice(0, 3);
 
   .coffee-tile:hover img {
     filter: saturate(1);
-    transform: translateY(-4px);
+    transform: translateY(-4px) rotate(-0.4deg);
   }
 
   .coffee-tile figcaption {
@@ -373,7 +581,17 @@ const previewSites = coffeeSites.slice(0, 3);
     color: var(--on-acid);
   }
 
+  .series-link span {
+    display: inline-block;
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .series-link:hover span {
+    transform: translate(6px, -6px);
+  }
+
   @media (max-width: 900px) {
+    .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .work-heading,
     .coffee-heading {
       grid-template-columns: 1fr;
@@ -392,6 +610,7 @@ const previewSites = coffeeSites.slice(0, 3);
   }
 
   @media (max-width: 620px) {
+    .mini-grid { grid-template-columns: 1fr; }
     .work-inner,
     .coffee-inner { padding-inline: 1rem; }
     .coffee-gallery { gap: 0.75rem; }
@@ -404,3 +623,45 @@ const previewSites = coffeeSites.slice(0, 3);
     .open-mark { opacity: 1; transform: none; }
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-more-work]").forEach((root) => {
+    const step = Number(root.dataset.initial) || 6;
+    const cards = Array.from(root.querySelectorAll<HTMLElement>(".mini"));
+    const chips = Array.from(root.querySelectorAll<HTMLButtonElement>(".chip"));
+    const moreBtn = root.querySelector<HTMLButtonElement>("[data-show-more]")!;
+    let filter = "all";
+    let limit = step;
+
+    function render() {
+      const matches = cards.filter((c) => filter === "all" || (c.dataset.tags ?? "").split(",").includes(filter));
+      const shown = matches.slice(0, limit);
+      cards.forEach((c) => {
+        if (!shown.includes(c)) c.hidden = true;
+      });
+      shown.forEach((c, i) => {
+        if (!c.hidden) return;
+        c.hidden = false;
+        c.style.setProperty("--i", String(i % 3));
+        // Replay the entrance for cards that just appeared (filter change / "Show more").
+        c.classList.remove("is-in");
+        requestAnimationFrame(() => requestAnimationFrame(() => c.classList.add("is-in")));
+      });
+      moreBtn.hidden = matches.length <= limit;
+    }
+
+    chips.forEach((chip) =>
+      chip.addEventListener("click", () => {
+        filter = chip.dataset.filter ?? "all";
+        limit = step;
+        chips.forEach((c) => c.classList.toggle("is-active", c === chip));
+        render();
+      }),
+    );
+    moreBtn.addEventListener("click", () => {
+      limit += step;
+      render();
+    });
+    render();
+  });
+</script>

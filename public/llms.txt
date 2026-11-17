@@ -1,0 +1,49 @@
+# Daffa Raihan
+
+> Full-stack engineer and informatics researcher based in Yogyakarta, Indonesia. Builds production web, mobile, and backend systems and applied AI products. Graduate of Universitas Islam Indonesia (UII), now a Master's student there.
+
+Portfolio: https://daffaraihan.vercel.app/
+GitHub: https://github.com/Dffarhn
+LinkedIn: https://linkedin.com/in/dapdap
+Instagram: https://instagram.com/dffar.hn
+CV (PDF): https://daffaraihan.vercel.app/project/CV.pdf
+
+## Core toolkit
+
+- Backend: Golang, NestJS, PHP, Laravel
+- Web and mobile: Next.js, Flutter
+- Data: PostgreSQL, MySQL, Redis
+- AI: OpenAI, Claude, Hermes
+- Infra: Docker, CI/CD
+
+## Selected projects
+
+- [IMUII](https://daffaraihan.vercel.app/projects/imuii): Automation platform built from scratch (founder and technical architect). Manages 45+ active projects with an 82% deployment success rate.
+- [Mibebi](https://daffaraihan.vercel.app/projects/mibebi): Cashier (POS) app for F&B and small businesses in Yogyakarta, with QR ordering, daily reports, and an owner dashboard (co-founder). Live at https://www.mibebi.com/
+- [HalalMate](https://daffaraihan.vercel.app/projects/halalmate): AI-powered mobile app that verifies halal food with OCR and OpenAI. 93% classification accuracy; Silver Medal at INDES 2025 and Best Paper at Automata 2025.
+- [AHLAN](https://daffaraihan.vercel.app/projects/ahlan): Chatbot platform for pesantren admissions over WhatsApp and Telegram, integrated with Hermes. Live at https://ahlanapp.cloud/
+- [SantriHub](https://daffaraihan.vercel.app/projects/santrihub): Pesantren attendance platform with barcode scanning and memorization logs. Live at https://santrihub-teal.vercel.app/
+- [Hermes @ IMUII](https://daffaraihan.vercel.app/projects/hermes): Hermes agent implemented on IMUII, operable from the dashboard and Discord.
+- [Future Doctor Tryout](https://daffaraihan.vercel.app/projects/future-doctor-tryout): Tryout system with a Hermes assistant and live class feature for Future Doctor Indonesia. Live at https://tryout.futuredoctorindonesia.com/
+- [KeepUp](https://daffaraihan.vercel.app/projects/keepup): Backend for mental health research at UII (auth, RBAC, automated reports).
+- [IT Centrum Finance](https://daffaraihan.vercel.app/projects/it-centrum-finance): Financial management system for IT Centrum UII.
+- [UII Tanda Mata](https://daffaraihan.vercel.app/projects/uii-tanda-mata): Production web platform at https://uiitandamata.com
+- [1 Coffee 1 Web](https://daffaraihan.vercel.app/projects/1-coffee-1-web): Design series of 16 coffee shop landing pages, each with its own visual language.
+
+Full list: https://daffaraihan.vercel.app/projects
+
+## Experience
+
+- QBIT: Intern Full Stack Web Developer (Jan 2026 to present). NestJS monorepo, RAG workflows, AI chatbot.
+- Emica: Full Stack Web Developer (Jun 2025 to present). Reservations and analytics product.
+- UII Informatics Laboratory: Laboratory Assistant (Sep 2023 to Jan 2026). Mentored 150+ students.
+- Savebite: Full Stack Mobile Developer (Aug 2024 to Jan 2025).
+- TEDxUII: Backend Developer (May 2024 to Jun 2024). Ticketing system backend.
+
+## Education and recognition
+
+- M.Kom. Informatics, Universitas Islam Indonesia (2026 to 2028). Research Assistant Scholarship, fully funded.
+- S.Kom. Informatics, Universitas Islam Indonesia (2022 to 2026). GPA 3.97 / 4.00, Cum Laude, Gold Pin.
+- Senior high school: Science Major (MIPA), MAN Insan Cendekia (2019 to 2022).
+- Silver Medal, INDES 2025 (Malaysia), for HalalMate.
+- Best Paper, Automata 2025, for XAI-based halal detection.

@@ -10,13 +10,13 @@ const achievements = [
 <div class="awards-section">
   <div class="awards-inner">
     <header>
-      <p class="section-index">05 / Recognition</p>
-      <h2>Work recognized<br />beyond the <em>screen.</em></h2>
+      <p class="section-index" data-reveal="fade">05 / Recognition</p>
+      <h2 data-split>Work recognized<br />beyond the <em>screen.</em></h2>
     </header>
 
     <ol class="awards-list">
       {achievements.map((award, index) => (
-        <li>
+        <li data-reveal style={`--i:${index}`}>
           <span class="award-index">A{index + 1}</span>
           <div>
             <p class="award-event">{award.event}</p>

@@ -17,9 +17,9 @@ const education = [
     focus: "Software engineering, distributed systems, applied AI",
   },
   {
-    level: "High school",
+    level: "Senior high school",
     period: "2019 — 2022",
-    degree: "STEM Program",
+    degree: "Science Major (MIPA)",
     school: "MAN Insan Cendekia",
     note: "GPA 88 / 100",
     focus: "Mathematics and problem solving",
@@ -30,13 +30,13 @@ const education = [
 <div class="education-section">
   <div class="education-inner">
     <header class="section-heading">
-      <p class="section-index">06 / Education</p>
-      <h2>Always building.<br /><em>Always learning.</em></h2>
+      <p class="section-index" data-reveal="fade">06 / Education</p>
+      <h2 data-split>Always building.<br /><em>Always learning.</em></h2>
     </header>
 
     <div class="education-grid">
       {education.map((item, index) => (
-        <article class:list={["education-card", { featured: index === 0 }]}>
+        <article class:list={["education-card", { featured: index === 0 }]} data-reveal style={`--i:${index}`}>
           <div class="card-top">
             <span>{item.level}</span>
             <span>{item.period}</span>

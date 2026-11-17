@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import HamburgerMenu from "./HamburgerMenu.astro";
+import logo from "../../assets/logo.png";
 
 interface NavLink {
   href: string;
@@ -18,12 +20,14 @@ const { navigasi } = Astro.props as Props;
     <div class="navbar-container">
       <div class="navbar-logo">
         <a href="/" class="logo-link" aria-label="Dffa Raihan  Home">
-          <img
-            src="/logo.png"
+          <Image
+            src={logo}
             alt=""
-            width="36"
-            height="36"
+            widths={[36, 72, 108]}
+            sizes="36px"
+            format="webp"
             class="logo-img"
+            loading="eager"
             decoding="async"
             fetchpriority="high"
           />
@@ -273,7 +277,8 @@ const { navigasi } = Astro.props as Props;
   }
 
   .navbar-link:hover .link-underline,
-  .navbar-link:focus-visible .link-underline {
+  .navbar-link:focus-visible .link-underline,
+  .navbar-link.is-active .link-underline {
     width: 100%;
   }
 

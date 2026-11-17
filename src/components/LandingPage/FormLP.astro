@@ -8,14 +8,14 @@ const socialLinks = [
 
 <footer class="contact-section">
   <div class="contact-inner">
-    <div class="contact-top">
+    <div class="contact-top" data-reveal="fade">
       <p class="section-index">07 / Start a conversation</p>
       <p class="availability"><span></span> Open to opportunities</p>
     </div>
 
-    <h2>Have a difficult problem?<br /><a href="https://linkedin.com/in/dapdap" target="_blank" rel="noopener noreferrer">Let’s build through it. <span>↗</span></a></h2>
+    <h2><span class="cta-line" data-split>Have a difficult problem?</span><br /><a data-reveal style="--i:4" href="https://linkedin.com/in/dapdap" target="_blank" rel="noopener noreferrer">Let’s build through it. <span>↗</span></a></h2>
 
-    <div class="contact-bottom">
+    <div class="contact-bottom" data-reveal="fade">
       <p>Full-stack engineering · Backend systems · Applied AI · Research</p>
       <nav aria-label="Social links">
         {socialLinks.map((link) => (
@@ -89,7 +89,7 @@ const socialLinks = [
     border-color: var(--on-dark);
   }
 
-  h2 span { font-size: 0.45em; }
+  h2 a span { font-size: 0.45em; }
 
   .contact-bottom {
     align-items: center;

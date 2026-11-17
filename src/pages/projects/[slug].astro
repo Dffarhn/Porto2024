@@ -29,12 +29,46 @@ function hostOf(item: Project) {
     return item.slug;
   }
 }
+
+const siteURL = (Astro.site ?? new URL(Astro.url.origin)).href.replace(/\/$/, "");
+const pageURL = `${siteURL}/projects/${project.slug}`;
+const ogPath = project.img ? `/og/${project.slug}.jpg` : "/og.png";
+const projectImageURL = `${siteURL}${ogPath}`;
+
+const jsonLdExtra = [
+  {
+    "@type": "CreativeWork",
+    "@id": `${pageURL}#project`,
+    name: project.title,
+    headline: project.subtitle,
+    description: project.description,
+    url: pageURL,
+    image: projectImageURL,
+    author: { "@id": `${siteURL}/#person` },
+    creator: { "@id": `${siteURL}/#person` },
+    keywords: project.techStack.join(", "),
+    inLanguage: "en",
+    mainEntityOfPage: { "@id": `${pageURL}#webpage` },
+    ...(project.links?.length ? { sameAs: project.links.map((link) => link.href) } : {}),
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteURL}/` },
+      { "@type": "ListItem", position: 2, name: "Projects", item: `${siteURL}/projects` },
+      { "@type": "ListItem", position: 3, name: project.title, item: pageURL },
+    ],
+  },
+];
 ---
 
 <Layout
-  title={project.title}
+  title={`${project.title} · ${project.subtitle}`}
   description={project.shortDescription}
   keywords={`${project.title}, daffa raihan, portfolio, ${project.techStack.join(", ")}`}
+  imagePath={ogPath}
+  ogType="article"
+  jsonLdExtra={jsonLdExtra}
 >
   <Navbar navigasi={navLinks} />
 
@@ -89,7 +123,7 @@ function hostOf(item: Project) {
             <span class="frame-url">{hostOf(project)}</span>
           </div>
           {project.img ? (
-            <img class="frame-image" src={project.img} alt="" />
+            <img class="frame-image" src={project.img} alt={`Preview of ${project.title}`} decoding="async" />
           ) : (
             <div class="frame-body">
               <p class="frame-kicker">{project.subtitle}</p>
@@ -141,7 +175,7 @@ function hostOf(item: Project) {
                 <div class={`series-row ${site.img ? "has-media" : ""}`}>
                   {site.img ? (
                     <div class="site-media">
-                      <img src={site.img} alt={`Screenshot of ${site.name}`} />
+                      <img src={site.img} alt={`Screenshot of ${site.name}`} loading="lazy" decoding="async" />
                     </div>
                   ) : (
                     <span class="site-num">{site.number}</span>
@@ -172,7 +206,7 @@ function hostOf(item: Project) {
                 <div class={`series-row ${site.img ? "has-media" : ""}`}>
                   {site.img ? (
                     <div class="site-media">
-                      <img src={site.img} alt={`Screenshot of ${site.name}`} />
+                      <img src={site.img} alt={`Screenshot of ${site.name}`} loading="lazy" decoding="async" />
                     </div>
                   ) : (
                     <span class="site-num">{site.number}</span>
