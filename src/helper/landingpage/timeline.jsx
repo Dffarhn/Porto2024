@@ -7,6 +7,7 @@ import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineOppositeContent, { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent";
 import TimelineContentComponent from "./componentTimeline";
 
+
 export default function TimelineContainer() {
   const isLaptop = useMediaQuery("(min-width: 1024px)");
 
